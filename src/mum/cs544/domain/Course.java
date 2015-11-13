@@ -1,17 +1,53 @@
 package mum.cs544.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Course {
-	private long id;
+	@Id
+	@GeneratedValue
+	private int id;
 	private String title;
 	private String description;
+	
+	@ManyToOne
+	private Instructor instructor;
+	
+	@Enumerated(EnumType.STRING)
 	private Category category;
-	private int price;
+	
+	private double price;
 	private int rating;
-	private String thumurl;
-	public long getId() {
+	private String thumburl;
+	private String video;
+	public String getThumburl() {
+		return thumburl;
+	}
+	public void setThumburl(String thumburl) {
+		this.thumburl = thumburl;
+	}
+	public String getVideo() {
+		return video;
+	}
+	public void setVideo(String video) {
+		this.video = video;
+	}
+	public Instructor getInstructor() {
+		return instructor;
+	}
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
+	}
+	
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getTitle() {
@@ -32,10 +68,10 @@ public class Course {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	public int getPrice() {
-		return price;
+	public double getPrice() {
+		return this.price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	public int getRating() {
@@ -45,13 +81,9 @@ public class Course {
 		this.rating = rating;
 	}
 	public String getThumurl() {
-		return thumurl;
+		return thumburl;
 	}
-	public void setThumurl(String thumurl) {
-		this.thumurl = thumurl;
+	public void setThumurl(String thumburl) {
+		this.thumburl = thumburl;
 	}
-	
-	
-	
-
 }

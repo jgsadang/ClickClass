@@ -1,5 +1,8 @@
 package mum.cs544.domain;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Address {
 	private String street;
 	private String zipcode;
@@ -29,6 +32,4 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
-
 }
