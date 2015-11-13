@@ -126,6 +126,6 @@
 		<version>4.0.0.RELEASE</version>
 	</dependency>
   </dependencies>
-  <groupId>com.course.online</groupId>
-  <artifactId>OnlineCourse</artifactId>
+  <groupId>ClickClass</groupId>
+  <artifactId>ClickClass</artifactId>
 </project>
