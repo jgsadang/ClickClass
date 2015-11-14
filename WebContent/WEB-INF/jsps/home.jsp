@@ -7,20 +7,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="resources/css/main.css"/>
-<title>Course Site</title>
+<script src="resources/script/myfile.js" type="text/javascript"></script>
+<title>Click Class</title>
 
 </head>
 <body>
 	<div id="banner">
-		<img src="resources/images/movielogo.png" alt="Spring Courses" />
+		<img src="resources/images/cclogo.png" alt="ClickClass"/>
+	</div>
+		<div id="menu">
+		<div class="menuLeft">
+			<form id="search" method="post" action="${pageContext.request.contextPath}/doSearch">
+				<label>Course:</label> <input name="searchKey" type="text" size="20" maxlength="20"/> <input value="Search" type="submit"/>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			</form>
+		</div>
+		<div class="menuRight">
+       		<img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" />
+       		<img class="profileLogo" src="resources/images/profile.jpg" alt="login" />
+       		<img class="registerLogo" src="resources/images/register.jpg" alt="register" />
+		</div>
 	</div>
 	<div id="main">
-	<h2><a href="${pageContext.request.contextPath}/courses">Show courses</a></h2>
-	<h2><a href="${pageContext.request.contextPath}/searchcourses">Search courses</a></h2>
-	<h2><a href="${pageContext.request.contextPath}/addcourse">Add course</a></h2>
-	<h2><a href="${pageContext.request.contextPath}/deletecourses">Delete courses</a></h2>
-	<h2><a href="${pageContext.request.contextPath}/adduser">Add user</a></h2>
-	<h2><a href="${pageContext.request.contextPath}/users">Show users</a></h2>
+		<!-- Add web content here -->
 	</div>
 </body>
 </html>
