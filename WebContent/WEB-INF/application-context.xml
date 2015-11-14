@@ -6,10 +6,12 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 	<aop:config proxy-target-class="true"/>
 
@@ -20,24 +22,12 @@
 		<property name="username" value="root" />	
 		<property name="password" value="lunes123" />	
 	</bean>
-
+	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
 	<!-- Session Factory Declaration -->
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="DataSource" />
-		<property name="annotatedClasses">
-			<list>
-				<value>mum.cs544.domain.Administrator</value>
-				<value>mum.cs544.domain.Course</value>
-				<value>mum.cs544.domain.Attendance</value>
-				<value>mum.cs544.domain.Authority</value>
-				<value>mum.cs544.domain.CreditCard</value>
-				<value>mum.cs544.domain.Person</value>
-				<value>mum.cs544.domain.Student</value>
-				<value>mum.cs544.domain.Instructor</value>
-				<value>mum.cs544.domain.User</value>
-			</list>
-		</property>
-		<property name="hibernateProperties">
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="DataSource"/>
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
+		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
@@ -47,15 +37,17 @@
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
 		</property>
+		<property name="packagesToScan" value="mum.cs544.domain"/>
 	</bean>
 	<!-- Enable the configuration of transactional behavior based on annotations -->
     <tx:annotation-driven transaction-manager="txManager"/>
 
 	<!-- Transaction Manager is defined -->
-    <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-       <property name="sessionFactory" ref="sessionFactory"/>
+    <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+       <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources/ directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<jpa:repositories base-package="mum.cs544.dao"/>
 </beans>
