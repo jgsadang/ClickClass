@@ -26,12 +26,15 @@
 		<property name="dataSource" ref="DataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<!-- <value>mum.cs544.domain.Address</value>
+				<value>mum.cs544.domain.Administrator</value>
 				<value>mum.cs544.domain.Course</value>
+				<value>mum.cs544.domain.Attendance</value>
+				<value>mum.cs544.domain.Authority</value>
 				<value>mum.cs544.domain.CreditCard</value>
-				<value>mum.cs544.domain.Instructor</value>
 				<value>mum.cs544.domain.Person</value>
-				<value>mum.cs544.domain.User</value> -->
+				<value>mum.cs544.domain.Student</value>
+				<value>mum.cs544.domain.Instructor</value>
+				<value>mum.cs544.domain.User</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

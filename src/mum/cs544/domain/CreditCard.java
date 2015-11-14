@@ -1,7 +1,13 @@
 package mum.cs544.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class CreditCard {
-	
+	@Id
+	@GeneratedValue
 	private long id;
 	private String nameOnCard;
 	private String ccNo;
