@@ -9,10 +9,10 @@
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:user-service>
-				<security:user name="jess" authorities="ROLE_ADMIN"
-					password="letmein" />
-				<security:user name="jack" authorities="ROLE_USER"
-					password="1234" />
+				<security:user name="admin" authorities="ROLE_ADMIN"
+					password="admin" />
+				<security:user name="simona" authorities="ROLE_USER"
+					password="simona" />
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
