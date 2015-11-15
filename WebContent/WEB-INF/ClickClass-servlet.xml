@@ -31,6 +31,9 @@
 		<property name="prefix" value="/WEB-INF/jsps/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-	
-	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+      	<!-- setting maximum upload size -->
+       	<property name="maxUploadSize" value="100000000" /> 
+    </bean>
 </beans>

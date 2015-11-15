@@ -28,7 +28,7 @@
 	<div id="main">
 	<section class="container">
 		<!-- Add web content here -->
-	  	<sf:form method="post" action="${pageContext.request.contextPath}/addCourse" commandName="course" class="form-horizontal" role="form">
+	  	<sf:form method="post" action="${pageContext.request.contextPath}/addCourse?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data" commandName="course" class="form-horizontal" role="form">
 		<fieldset>
 			<legend>New Course</legend>
 			<div class="form-group">
@@ -54,18 +54,21 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2">Image:</label>
+				<label class="control-label col-sm-2">Course Image:</label>
 				<div class="col-sm-10">
-				<sf:input name="thumburl" path="thumburl"  type="text" size="20" maxlength="20"/><sf:errors path="thumburl" cssClass="error"></sf:errors><br/>
+				<input type="file" name="file"><br/>
 				</div>
 			</div>
 			<div class="form-group">
-				<label>Upload video:</label><br/>	
+				<label class="control-label col-sm-2">Course video:</label>
+				<div class="col-sm-10">
+				<input type="file" name="file"><br/>	
+				</div>
 			</div>	
 			<div class="form-group">
 				<label class="control-label col-sm-2">Description:</label>
 				<div class="col-sm-10">
-				<sf:textarea name="description" path="description"  cols="50" rows="8"/><sf:errors path="description" cssClass="error"></sf:errors><br/>
+				<sf:textarea name="description" path="description"  cols="100" rows="8"/><sf:errors path="description" cssClass="error"></sf:errors><br/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -73,6 +76,7 @@
 					<input value="Add Course" type="submit"/>
 				</div>
 			</div>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		</fieldset>
 		</sf:form>
 	</section>
