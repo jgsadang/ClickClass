@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 	
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>  
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="resources/css/main.css"/>
 <script src="resources/script/myfile.js" type="text/javascript"></script>
 <title>Click Class</title>
@@ -29,7 +32,21 @@
 		</div>
 	</div>
 	<div id="main">
-		<!-- Add web content here -->
+		<c:if test="${courses.size() > 0}">
+		<div class="courseVideos">
+		<h2>Courses</h2>
+		<c:forEach var="course" items="${courses}">
+    		<div class="courseBox">
+				<a href="showCourse?id=${course.id}">
+				<img src="resources/CourseImages/${course.thumburl}" alt="view" />
+				</a>
+	    		<label>${course.title}</label><br/>
+	    		<label>$${course.price}</label>
+   			</div>
+		</c:forEach>
+		</div>
+		<br/>
+		</c:if>
 	</div>
 </body>
 </html>

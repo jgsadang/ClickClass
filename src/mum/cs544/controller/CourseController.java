@@ -79,7 +79,7 @@ public class CourseController implements ServletContextAware {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/resources/CourseFiles/*", method=RequestMethod.GET)
+	@RequestMapping(value = "/resources/CourseVideos/*", method=RequestMethod.GET)
 	public String restrictAccess() {
 		//redirect to home
 		return "redirect:/";
