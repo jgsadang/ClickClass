@@ -27,8 +27,9 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>
   		/WEB-INF/application-context.xml
-  		classpath:mum/cs544/config/dao-context.xml
-  		classpath:mum/cs544/config/service-context.xml
+  		/WEB-INF/ClickClass-servlet.xml
+  		 classpath:mum/cs544/config/dao-context.xml
+  		classpath:mum/cs544/config/service-context.xml 
   		classpath:mum/cs544/config/security-context.xml
   	</param-value>
   </context-param>

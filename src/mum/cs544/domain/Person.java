@@ -20,6 +20,13 @@ public class Person {
 	private String lastName;
 	private String email;
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	@Embedded
 	private Address address;
 
