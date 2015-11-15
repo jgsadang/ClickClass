@@ -1,11 +1,11 @@
 package mum.cs544.service;
 
 
-import mum.cs544.domain.Person;
+import mum.cs544.domain.Student;
 
 public interface StudentService  {
 	
 	
-	public void saveStudent(Person student);
+	public void saveStudent(Student student);
 	
 }

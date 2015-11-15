@@ -8,6 +8,8 @@ public class Address {
 	private String zipcode;
 	private String city;
 	private String country;
+	
+	
 	public String getState() {
 		return state;
 	}
