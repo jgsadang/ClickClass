@@ -24,8 +24,7 @@
 	</bean>	
 	<mvc:annotation-driven validator="myBeansValidator"></mvc:annotation-driven>
 
-	<bean id="jspViewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsps/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>

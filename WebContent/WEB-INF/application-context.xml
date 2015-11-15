@@ -1,142 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx" 
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-	xsi:schemaLocation="
-      http://www.springframework.org/schema/beans 
-      http://www.springframework.org/schema/beans/spring-beans.xsd
- 	  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-                  http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
-      http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
-
-	<!-- The jpa:repositories scans for all interfaces that extend Repository 
-		and creates implementations for use at runtime. -->
-	 <!-- <jpa:repositories base-package="mum.cs544.dao" />  -->
-	<!-- <jpa:repositories base-package="jpa" query-lookup-strategy="create-if-not-found" 
-		/> -->
-
-
-	<!-- Creates a JPA EntityManagerFactory according to JPA's standard container 
-		bootstrap contract. This is the most powerful way to set up a shared JPA 
-		EntityManagerFactory in a Spring application context; -->
-		
-	<context:annotation-config />
-	 <mvc:annotation-driven />	 
-		
-	<bean id="jpaVendorAdapter"
- class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />	
-		
-	<bean id="entityManager"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="mum.cs544.domain" />
-
-		<!-- provider-specific initialization,etc. -->
-		 <property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-		</property>
-		<property name="jpaProperties">
-			<props>
-				<!-- validate: validate the schema, makes no changes to the database. 
-					update: update the schema. create: creates the schema, destroying previous 
-					data. create-drop: drop the schema at the end of the session. These options 
-					intended to be developers tools and not to facilitate any production level 
-					databases <prop key="hibernate.hbm2ddl.auto">create-drop</prop> -->
-				<!-- hibernate.dialect. This property makes Hibernate generate the appropriate 
-					SQL for the chosen database. -->
-
-<!-- <prop key="hibernate.hbm2ddl.auto"> update</prop> -->
-             <!-- <prop key="hibernate.hbm2ddl.auto">create</prop>  -->
-            <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop> 
-             <prop key="hibernate.hbm2ddl.import_files">populate.sql</prop> 
-
-			</props>
-		</property>
-	</bean>
-
-	<!-- H2 database CONSOLE -->
-	<!-- <bean id="h2Server" class="org.h2.tools.Server" factory-method="createTcpServer" 
-		init-method="start" destroy-method="stop" depends-on="h2WebServer"> -->
-	<!-- <constructor-arg value="-tcp,-tcpAllowOthers,-tcpPort,9092"/> -->
-	<!-- </bean> -->
-	<!-- <bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer" 
-		init-method="start" destroy-method="stop"> -->
-	<!-- <constructor-arg value="-web,-webAllowOthers,-webPort,8082"/> -->
-	<!-- </bean> -->
-
-	<!-- database configuration -->
-	<!--bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
-		<property name="driverClassName" value="org.h2.Driver"/> <property name="url" 
-		value="jdbc:h2:tcp://localhost/~/JPA;DB_CLOSE_DELAY=-1;MODE=MySQL " /> </bean -->
-	<!-- ;INIT=runscript from 'classpath:create.sql'\;runscript from 'classpath:populate.sql' -->
-
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/courseDB" />
-		<property name="username" value="root" />
-		<property name="password" value="" />
-	</bean>
-
-
-
-	<!-- bean id="database.dataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy"> 
-		<constructor-arg> <bean class="org.springframework.jdbc.datasource.SimpleDriverDataSource"> 
-		<property name="driverClass" value="org.h2.Driver" /> <property name="url" 
-		value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MySQL;TRACE_LEVEL_SYSTEM_OUT=2" 
-		/> </bean> </constructor-arg> </bean -->
-
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManager" />
-	</bean>
-
-<!--  Scan for transaction-based resources  -->
-	 <context:component-scan base-package="mum.cs544.service" /> 
-     <context:component-scan base-package="mum.cs544.domain" />
-       <context:component-scan base-package="mum.cs544.controller" />
-	<context:component-scan base-package="mum.cs544.dao" /> 
-	
-
-	<tx:annotation-driven transaction-manager="transactionManager" />
-
-	<!-- Post-processor to perform exception translation on @Repository classes 
-		(from native exceptions such as JPA PersistenceExceptions to Spring&rsquo;s 
-		DataAccessException hierarchy). -->
-	 <bean id="persistenceExceptionTranslationPostProcessor"
-		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-
-</beans>
-
-
-
-
-
-
-
-
-<!-- <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
-	
-	<aop:config proxy-target-class="true"/>
-	
-	 <context:annotation-config />
-	  <mvc:annotation-driven />
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	Data Source Declaration
+
+	<aop:config proxy-target-class="true"/>
+
+	<!-- Data Source Declaration -->
+
 	<bean id="DataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />	
 		<property name="url" value="jdbc:mysql://localhost/courseDB" />
@@ -144,23 +21,13 @@
 		<property name="password" value="" />	
 	</bean>
 
-	Session Factory Declaration
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="DataSource" />
-		<property name="annotatedClasses">
-			<list>
-				<value>mum.cs544.domain.Administrator</value>
-				<value>mum.cs544.domain.Course</value>
-				<value>mum.cs544.domain.Attendance</value>
-				<value>mum.cs544.domain.Authority</value>
-				<value>mum.cs544.domain.CreditCard</value>
-				<value>mum.cs544.domain.Person</value>
-				<value>mum.cs544.domain.Student</value>
-				<value>mum.cs544.domain.Instructor</value>
-				<value>mum.cs544.domain.User</value>
-			</list>
-		</property>
-		<property name="hibernateProperties">
+	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+	<!-- Session Factory Declaration -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="DataSource"/>
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
+		<property name="jpaProperties">
+
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
@@ -170,25 +37,20 @@
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
 		</property>
+		<property name="packagesToScan" value="mum.cs544.domain"/>
 	</bean>
-	
-	<jpa:repositories base-package="mum.cs544.dao" />
-	Enable the configuration of transactional behavior based on annotations
-	
-    <tx:annotation-driven transaction-manager="txManager"/>
 
-	Transaction Manager is defined
-	
-	
-    <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-       <property name="sessionFactory" ref="sessionFactory"/>
+	<!-- Enable the configuration of transactional behavior based on annotations -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- Transaction Manager is defined -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+       <property name="entityManagerFactory" ref="entityManagerFactory"/>
+
     </bean>
-    	Handles HTTP GET requests for /resources/** by efficiently serving 
-		up static resources in the ${webappRoot}/resources/ directory
-	<mvc:resources mapping="/resources/**" location="/resources/" />
-	
-	 <bean id="persistenceExceptionTranslationPostProcessor"
-		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-	
-	
-</beans>  -->
+
+    <!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources/ directory -->
+	<jpa:repositories base-package="mum.cs544.dao"/>
+	<bean id="initializeData" class="mum.cs544.controller.InitializeData" init-method="init"/>
+</beans>
+
