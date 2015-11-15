@@ -17,7 +17,7 @@
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 	</bean>	
 	<mvc:annotation-driven validator="myBeansValidator"></mvc:annotation-driven>
-
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsps/"></property>
