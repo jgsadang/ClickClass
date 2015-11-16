@@ -29,9 +29,10 @@
 			</form>
 		</div>
 		<div class="menuRight">
-       		<a href=" <spring:url value="/logout" />" ><img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" /> </a>
-       		<a href=" <spring:url value="/login" />" ><img class="profileLogo" src="resources/images/profile.jpg" alt="login" /></a>
-       		<a href=" <spring:url value="/studentSignUp" />" ><img class="registerLogo" src="resources/images/register.jpg" alt="register" /> </a>
+       		<a href=" <spring:url value="/logout" />" ><abbr title="Logout"><img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" /></abbr> </a>
+       		<a href=" <spring:url value="/login" />" ><abbr title="Login"><img class="profileLogo" src="resources/images/profile.jpg" alt="login" /></abbr></a>
+       		<a href=" <spring:url value="/studentSignUp" />" ><abbr title="Register"><img class="registerLogo" src="resources/images/register.jpg" alt="register" /></abbr> </a>
+       		<a href=" <spring:url value="/instructorSignUp" />" ><abbr title="Become Instructor"><img class="instructorLogo" src="resources/images/instructor.png" alt="become instructor" /></abbr> </a>
 		</div>
 	</div>
 	<div id="main">
