@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,7 +56,11 @@ public class CourseController implements ServletContextAware {
 
 				// Creating the directory to store file
 				//String rootPath = System.getProperty("catalina.home");
-				File dir = new File(this.servletContext.getRealPath("/resources") + File.separator + "CourseFiles");
+				String folder = "CourseImages";
+				if (i==0) {
+					folder = "CourseVideos";
+				}
+				File dir = new File(this.servletContext.getRealPath("/resources") + File.separator + folder);
 				if (!dir.exists())
 					dir.mkdirs();
 
@@ -79,11 +84,11 @@ public class CourseController implements ServletContextAware {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/resources/CourseVideos/*", method=RequestMethod.GET)
-	public String restrictAccess() {
+	/*@RequestMapping(value = "/resources/CourseVideos/{resource}", method=RequestMethod.GET)
+	public String restrictAccess(@PathVariable String resource) {
 		//redirect to home
-		return "redirect:/";
-	}
+		return resource;
+	}*/
 	
 	@RequestMapping(value = "/showCourse", method=RequestMethod.GET)
 	public String showCourse(@RequestParam Integer id, Model model) {
@@ -92,5 +97,11 @@ public class CourseController implements ServletContextAware {
 		model.addAttribute("instructor", instructor);
 		model.addAttribute("course", course);
 		return "showCourse";
+	}
+	
+	@RequestMapping(value = "/viewCourse", method=RequestMethod.POST)
+	public String viewCourse(@RequestParam Integer id, Model model) {
+		//redirect to home
+		return "viewCourse";
 	}
 }

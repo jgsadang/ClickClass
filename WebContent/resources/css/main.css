@@ -83,6 +83,16 @@ body {
     overflow:auto;
     box-shadow: 5px 5px 5px gray;
 }
+#viddeoPlayer {
+	border-radius: 10px;
+	background-color: #90D050;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 20px;
+	margin: 0 auto;
+	width: 520px;
+	height: 380px;
+}
 .price {
 	color: blue;
 	font-size: 18pt;
