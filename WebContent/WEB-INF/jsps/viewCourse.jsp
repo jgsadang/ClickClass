@@ -21,31 +21,17 @@
 		<div id="menu">
 		<div class="menuRight">
 			<a href="${pageContext.request.contextPath}/"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
-       		<a href="${pageContext.request.contextPath}/logout"><img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" /> </a>
+       		<img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" />
 		</div>
 	</div>
 	<div id="main">
-		<c:if test="${course != null}">
-		<div class="courseVideos">
-			<h2>${course.title}</h2>
-    		<div class="courseSmallBox">
-				<!-- <a href="showCourse?id=${course.id}"> -->
-				<img src="resources/CourseImages/${course.thumburl}" alt="view" />
-				<!-- </a> -->
-				<p>Rating</p>
-   			</div>
-   			<div class="courseDetails">
-   				<label>${course.title}</label><p>by ${instructor.firstName} ${instructor.lastName}</p>
-	    		<form method="post" action="${pageContext.request.contextPath}/payCourse">
-	    			<label class="price">$${course.price}</label>
-	    			<input type="hidden" name="id" value="${course.id}"/>
-	    			<input value="Take this course" type="submit"/>
-	    			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	    		</form> 
-   				<label>About the course</label><p>${course.description}</p> 
-	    	</div>
-		</div>
-		<br/>
+		<c:if test="${course == null}">
+			<div id="viddeoPlayer">
+				<video width="480" height="360"  controls>
+	  				<source src="resources/CourseVideos/5u8rFbpdvds.mp4" type="video/mp4">  					
+					Your browser does not support the video tag.
+				</video>
+			</div>
 		</c:if>
 	</div>
 </body>
