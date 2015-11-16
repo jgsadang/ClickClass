@@ -20,8 +20,12 @@
 	<!-- <security:intercept-url pattern="/login" filters="none"/> -->
 <http auto-config="true">
 
-	  <intercept-url pattern="/**" method="POST" access="ROLE_ADMIN" /> 
+ 
 	    <intercept-url pattern="/addCourse" method="GET" access="ROLE_INSTRUCTOR" />
+	    <intercept-url pattern="/payCourse" method="POST" access="ROLE_STUDENT" />
+	    <intercept-url pattern="/submitPayment" method="POST" access="ROLE_STUDENT" />
+	    <intercept-url pattern="/viewCourse" method="POST" access="ROLE_STUDENT" />
+	   	<intercept-url pattern="/**" method="POST" access="ROLE_ADMIN" />
 		<intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/> 
 		<intercept-url pattern="/welcome" access="IS_AUTHENTICATED_ANONYMOUSLY"/> 
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET" />
@@ -50,7 +54,7 @@
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url" value="jdbc:mysql://localhost/courseDB" />
 		<beans:property name="username" value="root" />
-		<beans:property name="password" value="7788521" />
+		<beans:property name="password" value="" />
 	</beans:bean>
 
 
