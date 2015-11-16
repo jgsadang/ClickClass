@@ -11,6 +11,6 @@ import mum.cs544.domain.User;
 @Repository
 public interface UserDAO extends JpaRepository <User, Integer>{
 	
-	
+	public User findByUsername(String username);
 }
 

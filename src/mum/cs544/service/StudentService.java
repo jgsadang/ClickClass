@@ -7,5 +7,5 @@ public interface StudentService  {
 	
 	
 	public void saveStudent(Student student);
-	
+	public Student getStudent(String username);
 }

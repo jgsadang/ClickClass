@@ -1,6 +1,8 @@
 package mum.cs544.controller;
 
 import java.io.InputStream;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,10 +11,13 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.ServletContextAware;
 
 import com.paypal.api.payments.Address;
@@ -25,12 +30,15 @@ import com.paypal.api.payments.Transaction;
 import com.paypal.core.rest.APIContext;
 import com.paypal.core.rest.OAuthTokenCredential;
 import com.paypal.core.rest.PayPalRESTException;
-import com.paypal.core.rest.PayPalResource;
 
+import mum.cs544.domain.Attendance;
 import mum.cs544.domain.Course;
 import mum.cs544.domain.CreditCard;
+import mum.cs544.domain.Student;
+import mum.cs544.service.AttendanceService;
 import mum.cs544.service.CourseService;
 import mum.cs544.service.InstructorService;
+import mum.cs544.service.StudentService;
 
 @Controller
 public class PaymentController implements ServletContextAware {
@@ -38,6 +46,10 @@ public class PaymentController implements ServletContextAware {
 	private InstructorService instructorService;
 	@Autowired
 	private CourseService courseService;
+	@Autowired
+	private StudentService studentService;
+	@Autowired
+	private AttendanceService attendanceService;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -47,25 +59,54 @@ public class PaymentController implements ServletContextAware {
 	}
 	
 	@RequestMapping(value = "/payCourse", method=RequestMethod.POST)
-	public String payCourse(Model model) {
-		CreditCard cc = new CreditCard();
-		model.addAttribute("creditCard", cc);
-		return "payment";
+	public String payCourse(Model model, @RequestParam Integer id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName(); //get logged in username
+	    Student student = this.studentService.getStudent(username);
+	    if (student != null) {
+	    	Course course = this.courseService.getCourse(id);
+	    	Attendance attendance = this.attendanceService.getAttendance(student, course);
+	    	if (attendance!=null) {
+	    		model.addAttribute("course", course);
+	    		return "viewCourse";
+	    	}
+	    	mum.cs544.domain.Address address = student.getAddress();
+	    	CreditCard cc = new CreditCard();
+	    	model.addAttribute("creditCard", cc);
+	    	model.addAttribute("course", course);
+	    	model.addAttribute("address", address);
+	    	model.addAttribute("student", student);
+	    	return "payment";
+	    } else {
+	    	return "redirect:/login";
+	    }
 	}
 	
 	@RequestMapping(value = "/submitPayment", method=RequestMethod.POST)
-	public String submitPayment(Model model, Course course) {
+	public String submitPayment(Model model, Course course, mum.cs544.domain.Address address, mum.cs544.domain.CreditCard cc) {
 		
-		InputStream is = this.servletContext.getResourceAsStream("/resources/sdk_config.properties");
-		try {
-			Payment.initConfig(is);
-			//OAuthTokenCredential tokenCredential = Payment.
-			//createPayment();
-			//Successful payment
-			return "redirect:/paymentSuccess";
-		} catch (PayPalRESTException e) {
-			System.out.println(e.getMessage());
-		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName(); //get logged in username
+	    Student student = this.studentService.getStudent(username);
+	    if (student != null) {
+	    	InputStream is = this.servletContext.getResourceAsStream("/resources/sdk_config.properties");
+			try {
+				Payment.initConfig(is);
+				//OAuthTokenCredential tokenCredential = Payment.
+				//createPayment();
+				//Successful payment
+				course = this.courseService.getCourse(course.getId());
+				Attendance attendance = new Attendance();
+				attendance.setCourse(course);
+				attendance.setStudent(student);
+				attendance.setDate(Date.valueOf(LocalDate.now()));
+				attendanceService.save(attendance);
+				model.addAttribute("course", course);
+				return "paymentSuccess";
+			} catch (PayPalRESTException e) {
+				System.out.println(e.getMessage());
+			}
+	    } 
 		//Error return back to payment page
 		return "payment";
 	}

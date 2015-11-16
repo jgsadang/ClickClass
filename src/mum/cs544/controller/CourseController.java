@@ -102,6 +102,9 @@ public class CourseController implements ServletContextAware {
 	@RequestMapping(value = "/viewCourse", method=RequestMethod.POST)
 	public String viewCourse(@RequestParam Integer id, Model model) {
 		//redirect to home
+		Course course = courseService.getCourse(id);
+		model.addAttribute("course", course);
 		return "viewCourse";
 	}
+	
 }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import mum.cs544.domain.Administrator;
 import mum.cs544.domain.Instructor;
 import mum.cs544.domain.Student;
-import mum.cs544.service.AdministratorService;
 import mum.cs544.service.CourseService;
 import mum.cs544.service.InstructorService;
 import mum.cs544.service.StudentService;
@@ -33,8 +32,8 @@ public class RegistrationController {
 	@Autowired
 	private CourseService courseService;
 	
-	@Autowired
-	AdministratorService administratorService;
+	//@Autowired
+	//AdministratorService administratorService;
 	
 	
 	
@@ -80,12 +79,12 @@ public class RegistrationController {
 		return "administratorSignUp";
 	}
 	
-	@RequestMapping(value="/administratorSignUp", method=RequestMethod.POST)
+	/*@RequestMapping(value="/administratorSignUp", method=RequestMethod.POST)
 	public String processAdminstratorSignUp(@ModelAttribute Administrator administrator){
 		administrator.getUser().getAuthority().setUsername(administrator.getUser().getUsername());
 		administratorService.saveAdminstrator(administrator);
 		return "redirect:/welcome";
-	}
+	}*/
 	
 	
 	
