@@ -142,11 +142,10 @@
 				</div>
 
 				<!-- <label class="control-label col-lg-2" for="authority">Role</label> -->
-				<form:hidden path="user.authority.authority" value="student" />
+				<form:hidden path="user.authority.authority" value="ROLE_STUDENT" />
 				<%-- <form:errors path="credentials.authority" cssClass="text-danger"/> --%>
 
-				<%-- <form:hidden path="credentials.enabled" value="TRUE" /> --%>
-
+				<form:hidden path="user.enabled" value="TRUE" />
 
 
 

@@ -1,5 +1,7 @@
 package mum.cs544.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,5 +22,18 @@ public class CourseServiceImpl implements CourseService {
 	
 	public void save(Course course) {
 		courseDAO.save(course);
+	}
+
+	@Override
+	public List<Course> getCourseByTitle(String title) {
+		
+		
+		return courseDAO. find(title);
+	}
+
+	@Override
+	public List<Course> getCoursesByInstructorId(long id) {
+		
+		return courseDAO.findByInstructor_Id(id);
 	}
 }

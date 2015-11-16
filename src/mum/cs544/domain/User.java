@@ -22,6 +22,8 @@ public class User {
 	@OneToOne(mappedBy="user")
 	private Person person;
 	
+	Boolean enabled;
+	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Authority authority;
 
@@ -63,5 +65,14 @@ public class User {
 
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}	
+	
 }

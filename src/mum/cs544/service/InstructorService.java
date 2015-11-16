@@ -7,4 +7,6 @@ public interface InstructorService {
 	
 	public void saveInstructor(Instructor instructor);
 	public Instructor getInstructor(int id);
+	
+	public Instructor getInstructorByUserName(String userNmae);
 }

@@ -27,4 +27,10 @@ public class InstructorServiceImpl implements InstructorService {
 		userDao.save(instructor.getUser());
 		instructorDAO.save(instructor);
 	}
+
+	@Override
+	public Instructor getInstructorByUserName(String userName) {
+		
+		return instructorDAO.findInstructorByUserName(userName);
+	}
 }

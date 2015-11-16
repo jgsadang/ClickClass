@@ -19,9 +19,15 @@
 	
 	
 	<context:annotation-config/>
+	
     <bean id="myBeansValidator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 	</bean>	
+	
+	
+	<bean id= "messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+   		<property name="basename" value="messages"/> 
+	</bean>
 	<mvc:annotation-driven validator="myBeansValidator"></mvc:annotation-driven>
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />

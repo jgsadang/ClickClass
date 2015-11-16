@@ -121,11 +121,9 @@
 				</div>
 
 				<!-- <label class="control-label col-lg-2" for="authority">Role</label> -->
-				<form:hidden path="user.authority.authority" value="student" />
-				<%-- <form:errors path="credentials.authority[0].authority" cssClass="text-danger"/> --%>
-
-				<%-- <form:hidden path="credentials.enabled" value="TRUE" /> --%>
-
+				<form:hidden path="user.authority.authority" value="ROLE_INSTRUCTOR" />
+				
+				
 
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="username">User
@@ -146,7 +144,7 @@
 						<%-- <form:errors path="password" cssClass="text-danger" /> --%>
 					</div>
 				</div>
-
+                   <form:hidden path="user.enabled" value="TRUE" />
 
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
