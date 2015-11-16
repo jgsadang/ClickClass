@@ -84,4 +84,13 @@ public class CourseController implements ServletContextAware {
 		//redirect to home
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value = "/showCourse", method=RequestMethod.GET)
+	public String showCourse(@RequestParam Integer id, Model model) {
+		Course course = this.courseService.getCourse(id);
+		Instructor instructor = course.getInstructor();
+		model.addAttribute("instructor", instructor);
+		model.addAttribute("course", course);
+		return "showCourse";
+	}
 }

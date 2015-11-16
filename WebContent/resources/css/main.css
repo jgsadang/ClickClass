@@ -55,3 +55,35 @@ body {
     overflow:hidden;
     box-shadow: 5px 5px 5px gray;
 }
+.courseSmallBox {
+	background-color: #90D050;
+	width: 350px;
+	height: 240px;
+	float: left;
+	margin-top: 10px;
+	margin-left: 20px;
+	border-style: solid;
+    border-color: gray;
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 10px;
+    overflow:hidden;
+    box-shadow: 5px 5px 5px gray;
+}
+.courseDetails {
+	width: 600px;
+	height: 240px;
+	float: left;
+	margin-top: 10px;
+	margin-left: 20px;
+	border-style: dotted;
+    border-color: gray;
+    border-width: 2px;
+    padding: 10px;
+    overflow:auto;
+    box-shadow: 5px 5px 5px gray;
+}
+.price {
+	color: blue;
+	font-size: 18pt;
+}
