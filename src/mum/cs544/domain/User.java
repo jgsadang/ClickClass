@@ -8,15 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="users")
 public class User {
 	@Id
 	@GeneratedValue
 	private int id;
-	
+	@NotEmpty(message="Set your username")
 	private String username;
-	
+	@NotEmpty(message="Set your password")
 	private String password;
 	
 	@OneToOne(mappedBy="user")

@@ -33,7 +33,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public List<Course> getCoursesByInstructorId(long id) {
+	public List<Course> getCoursesByInstructorId(int id) {
 		
 		return courseDAO.findByInstructor_Id(id);
 	}
@@ -41,5 +41,10 @@ public class CourseServiceImpl implements CourseService {
 	public List<Course> getCourses() {
 		return courseDAO.findAll();
 
+	}
+
+	@Override
+	public int deletById(int id) {
+		return courseDAO.deleteById(id);
 	}
 }

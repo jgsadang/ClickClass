@@ -25,8 +25,9 @@
 		</div>
 	</div>
 	<div id="main">
-		<c:if test="${course != null}">
+		<c:if test="${Courses != null}">
 		<div class="courseVideos">
+		<c:forEach var="course" items="${Courses}">
 			<h2>${course.title}</h2>
     		<div class="courseSmallBox">
 				<!-- <a href="showCourse?id=${course.id}"> -->
@@ -35,14 +36,16 @@
 				<p>Rating</p>
    			</div>
    			<div class="courseDetails">
-   				<label>${course.title}</label><p>by ${instructor.firstName} ${instructor.lastName}</p>
+   				<%-- <label>${Courses.title}</label><p>by ${instructor.firstName} ${instructor. lastName}</p>--%>
 	    		<form>
 	    			<label class="price">$${course.price}</label>
 	    			<input type="hidden" name="id" value="${course.id}"/>
-	    			<input value="Take this course" type="submit"/>
 	    		</form> 
-   				<label>About the course</label><p>${course.description}</p> 
+   				<label>About the course</label><p>${course.description}</p>
+   				<a href="#"> EDIT</a>
+   				<a href="${pageContext.request.contextPath}/deleteCourse?id=${course.id}"> DELETE</a>
 	    	</div>
+	    	</c:forEach>
 		</div>
 		<br/>
 		</c:if>

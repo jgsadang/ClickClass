@@ -1,14 +1,22 @@
 package mum.cs544.domain;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Embeddable
 public class Address {
+	@NotEmpty(message = "Can not be left blank")
 	private String street;
+	@Pattern(regexp = "^\\d{5}(-\\d{4})?$", message = "should be nnnnn-nnnn format")
 	private String zipcode;
+	@NotEmpty(message = "Can not be left blank")
 	private String city;
+	@NotEmpty(message = "Can not be left blank")
 	private String country;
-	
+	@NotEmpty(message = "Can not be left blank")
+	private String state;
 	
 	public String getState() {
 		return state;
@@ -16,7 +24,7 @@ public class Address {
 	public void setState(String state) {
 		this.state = state;
 	}
-	private String state;
+	
 	public String getStreet() {
 		return street;
 	}

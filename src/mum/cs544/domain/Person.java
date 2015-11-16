@@ -7,6 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -14,17 +18,21 @@ public class Person {
 	
 	@Id
 	@GeneratedValue
-	private int id;
-
+	private int id ;
+	@NotEmpty(message="can not be Empty")
 	private String firstName;
+	@NotEmpty(message="can not be Empty")
 	private String lastName;
+    @Email
 	private String email;
 
 	
 	@Embedded
+	@Valid
 	private Address address;
 
 	@OneToOne
+	@Valid
 	private User user;
 
 	public int getId() {

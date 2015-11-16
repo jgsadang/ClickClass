@@ -18,21 +18,10 @@
 	<div id="banner">
 		<img src="resources/images/cclogo.png" alt="ClickClass" />
 	</div>
-	<div id="menu">
-		<div class="menuLeft">
-			<form id="search" method="post"
-				action="${pageContext.request.contextPath}/doSearch">
-				<label>Course:</label> <input name="searchKey" type="text" size="20"
-					maxlength="20" /> <input value="Search" type="submit" /> <input
-					type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-			</form>
-		</div>
+	 <div id="menu">
 		<div class="menuRight">
-			<img class="logoutLogo" src="resources/images/logout.jpg"
-				alt="logout" /> <img class="profileLogo"
-				src="resources/images/profile.jpg" alt="login" /> <img
-				class="registerLogo" src="resources/images/register.jpg"
-				alt="register" />
+			<a href="${pageContext.request.contextPath}/"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
+       		<a href="${pageContext.request.contextPath}/logout"><img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" /> </a>
 		</div>
 	</div>
 	<div id="main">
@@ -50,7 +39,7 @@
 					<div class="col-lg-10">
 						<form:input class="form:input-large" id="username"
 							path="user.username" value="" />
-						<%-- <form:errors path="user.username" cssClass="text-danger" />  --%>
+						 <form:errors path="user.username" cssClass="text-danger" />  
 					</div>
 				</div>
 
@@ -60,7 +49,7 @@
 					<div class="col-lg-10">
 						<form:input class="form:input-large" id="password"
 							path="user.password" value="" type="password" />
-						<%-- <form:errors path="password" cssClass="text-danger" /> --%>
+						 <form:errors path="user.password" cssClass="text-danger" /> 
 					</div>
 				</div>
 
@@ -72,7 +61,7 @@
 					<div class="col-sm-10">
 						<form:input class="form:input-large" id="firstName"
 							path="firstName" value="" />
-						<%-- <form:errors path="firstName" cssClass="text-danger"/> --%>
+						 <form:errors path="firstName" cssClass="text-danger"/> 
 					</div>
 				</div>
 				<div class="form-group">
@@ -81,7 +70,7 @@
 					<div class="col-lg-10">
 						<form:input class="form:input-large" id="lastName" path="lastName"
 							value="" />
-						<%-- <form:errors path="lastName" cssClass="text-danger" /> --%>
+					 <form:errors path="lastName" cssClass="text-danger" /> 
 					</div>
 				</div>
 
@@ -90,7 +79,7 @@
 					<div class="col-lg-10">
 						<form:input class="form:input-large" id="email" path="email"
 							value="" />
-						<%-- <form:errors path="email" cssClass="text-danger" />   --%>
+						 <form:errors path="email" cssClass="text-danger" />   
 
 					</div>
 				</div>
@@ -100,7 +89,7 @@
 					<div class="col-lg-10">
 						<form:input class="form:input-large" id="country"
 							path="address.country" value="" type="text" />
-						<%-- <form:errors path="address.country" cssClass="text-danger" />  --%>
+						 <form:errors path="address.country" cssClass="text-danger" />  
 					</div>
 				</div>
 
@@ -109,7 +98,7 @@
 					<div class="col-lg-10">
 						<form:input class="form:input-large" id="state"
 							path="address.state" value="" type="text" />
-						<%-- <form:errors path="address.street" cssClass="text-danger" />  --%>
+						 <form:errors path="address.state" cssClass="text-danger" /> 
 					</div>
 				</div>
 				<div class="form-group">
@@ -117,7 +106,7 @@
 					<div class="col-lg-10">
 						<form:input class="form:input-large" id="city" path="address.city"
 							value="" type="text" />
-						<%-- <form:errors path="address.city" cssClass="text-danger" />  --%>
+						 <form:errors path="address.city" cssClass="text-danger" />  
 					</div>
 				</div>
 
@@ -126,7 +115,7 @@
 					<div class="col-lg-10">
 						<form:input class="form:input-large" id="street"
 							path="address.street" value="" type="text" />
-						<%-- <form:errors path="address.street" cssClass="text-danger" />  --%>
+						 <form:errors path="address.street" cssClass="text-danger" />  
 					</div>
 				</div>
 
@@ -137,14 +126,11 @@
 					<div class="col-lg-10">
 						<form:input class="form:input-large" id="zipcode"
 							path="address.zipcode" value="" type="text" />
-						<%-- <form:errors path="address.zipcode" cssClass="text-danger" />  --%>
+						 <form:errors path="address.zipcode" cssClass="text-danger" />  
 					</div>
 				</div>
 
-				<!-- <label class="control-label col-lg-2" for="authority">Role</label> -->
 				<form:hidden path="user.authority.authority" value="ROLE_STUDENT" />
-				<%-- <form:errors path="credentials.authority" cssClass="text-danger"/> --%>
-
 				<form:hidden path="user.enabled" value="TRUE" />
 
 

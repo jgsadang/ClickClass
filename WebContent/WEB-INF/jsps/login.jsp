@@ -19,29 +19,22 @@
 <div id="banner">
 		<img src="resources/images/cclogo.png" alt="ClickClass"/>
 	</div>
-		<div id="menu">
-		<div class="menuLeft">
-			<form id="search" method="post" action="${pageContext.request.contextPath}/doSearch">
-				<label>Course:</label> <input name="searchKey" type="text" size="20" maxlength="20"/> <input value="Search" type="submit"/>
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			</form>
-		</div>
+		 <div id="menu">
+		 
 		<div class="menuRight">
-       		<img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" />
-       		<img class="profileLogo" src="resources/images/profile.jpg" alt="login" />
-       		<img class="registerLogo" src="resources/images/register.jpg" alt="register" />
+			<a href="${pageContext.request.contextPath}/"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
+       		<a href="${pageContext.request.contextPath}/logout"><img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" /> </a>
 		</div>
 	</div>
 	<div id="main">
- <div class="container">
-				<c:if test="${not empty error}">
-<div class="alert alert-danger"  >
-${error}<br />
+		
+<section class="container">
+
+<c:if test="${not empty error}">
+<div class="alert alert-danger"  >${error}<br />
 </div>
 </c:if>
-</div> 
-		
-<section class="container2">
+
 <form action="<c:url value="/j_spring_security_check"></c:url>"  class="form-horizontal" method="post">
 <fieldset class="fs">
 	<legend>LogIn</legend>

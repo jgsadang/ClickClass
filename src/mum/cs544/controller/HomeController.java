@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
@@ -34,10 +35,10 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("/welcome")
+	/*@RequestMapping("/welcome")
 	public String showWelcomepage() {
-		return "home";
-	}
+		return "userPage";
+	}*/
 	
 
     @RequestMapping(value="/login", method = RequestMethod.GET)
@@ -50,9 +51,21 @@ public class HomeController {
 	model.addAttribute("error", "Invalid username or password!");
 	return "login";
 	}
+	
+	@RequestMapping(value="/loginsucess", method = RequestMethod.GET)
+	public String loginSucess(Model model) {
+	return "userPage";
+	}
+	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logout(Model model) {
-	return "redirect:/welcome";
+	return "redirect:/";
+	}
+	
+	
+	@ModelAttribute
+	public void init(Model model) {
+		model.addAttribute("courses", courseService.getCourses());
 	}
 }
 

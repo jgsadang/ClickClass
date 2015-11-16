@@ -18,6 +18,8 @@ public interface CourseDAO extends JpaRepository <Course, Integer>{
 	//List<Course> findByTitleStartsWith(String title);
 
 	
-	public List<Course> findByInstructor_Id(Long id );
+	public List<Course> findByInstructor_Id(int id );
+	
+	int deleteById(int id);
 
 }

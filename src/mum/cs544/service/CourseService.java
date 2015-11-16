@@ -13,9 +13,11 @@ public interface CourseService {
 	
 	public List<Course> getCourseByTitle(String title);
 	
-	public List<Course> getCoursesByInstructorId (long id);
+	public List<Course> getCoursesByInstructorId (int id);
 
 	public Course getCourse(int id);
 	public List<Course> getCourses();
+	
+	public int deletById(int id );
 
 }
