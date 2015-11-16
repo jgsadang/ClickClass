@@ -20,9 +20,8 @@
 	</div>
 		<div id="menu">
 		<div class="menuRight">
+			<a href="${pageContext.request.contextPath}/"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
        		<img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" />
-       		<img class="profileLogo" src="resources/images/profile.jpg" alt="login" />
-       		<img class="registerLogo" src="resources/images/register.jpg" alt="register" />
 		</div>
 	</div>
 	<div id="main">
@@ -34,7 +33,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2">Title:</label>
 				<div class="col-sm-10">
-				<sf:input name="title" path="title" type="text" size="50" maxlength="150"/> <sf:errors path="title" cssClass="error"></sf:errors><br/>
+				<sf:input name="title" path="title" type="text" size="20" maxlength="20"/> <sf:errors path="title" cssClass="error"></sf:errors><br/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -50,7 +49,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2">Price:</label>
 				<div class="col-sm-10">
-				<sf:input name="price" path="price"  type="text" size="10" maxlength="10"/><sf:errors path="price" cssClass="error"></sf:errors><br/>
+				<sf:input name="price" path="price"  type="text" size="20" maxlength="20"/><sf:errors path="price" cssClass="error"></sf:errors><br/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -68,7 +67,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2">Description:</label>
 				<div class="col-sm-10">
-				<sf:textarea name="description" path="description"  cols="75" rows="8"/><sf:errors path="description" cssClass="error"></sf:errors><br/>
+				<sf:textarea name="description" path="description"  cols="100" rows="8"/><sf:errors path="description" cssClass="error"></sf:errors><br/>
 				</div>
 			</div>
 			<div class="form-group">

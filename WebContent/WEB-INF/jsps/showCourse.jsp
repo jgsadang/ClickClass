@@ -20,9 +20,8 @@
 	</div>
 		<div id="menu">
 		<div class="menuRight">
+			<a href="${pageContext.request.contextPath}/"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
        		<img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" />
-       		<img class="profileLogo" src="resources/images/profile.jpg" alt="login" />
-       		<img class="registerLogo" src="resources/images/register.jpg" alt="register" />
 		</div>
 	</div>
 	<div id="main">
