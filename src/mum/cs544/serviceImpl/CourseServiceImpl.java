@@ -24,6 +24,7 @@ public class CourseServiceImpl implements CourseService {
 		courseDAO.save(course);
 	}
 
+
 	@Override
 	public List<Course> getCourseByTitle(String title) {
 		
@@ -35,5 +36,10 @@ public class CourseServiceImpl implements CourseService {
 	public List<Course> getCoursesByInstructorId(long id) {
 		
 		return courseDAO.findByInstructor_Id(id);
+	}
+	
+	public List<Course> getCourses() {
+		return courseDAO.findAll();
+
 	}
 }

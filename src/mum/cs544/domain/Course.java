@@ -80,10 +80,4 @@ public class Course {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public String getThumurl() {
-		return thumburl;
-	}
-	public void setThumurl(String thumburl) {
-		this.thumburl = thumburl;
-	}
 }
