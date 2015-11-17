@@ -52,6 +52,12 @@
 		</div>
 	</div>
 	<div id="main">
+<section class="container">
+		<c:if test="${not empty noCourse}">
+			<div class="alert alert-success">
+				${noCourse}<br />
+			</div>
+		</c:if>
 		<c:if test="${courses.size() > 0}">
 		<div class="courseVideos">
 		<h2>Courses</h2>
@@ -67,6 +73,7 @@
 		</div>
 		<br/>
 		</c:if>
+		</section>
 	</div>
 </body>
 </html>
