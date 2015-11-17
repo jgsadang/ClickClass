@@ -97,3 +97,20 @@ body {
 	color: blue;
 	font-size: 18pt;
 }
+.rating {
+	float:right;
+	padding-top: 10px;
+}
+.rating1 {
+	padding-top: 5px;
+	padding-right: 10px;
+	float:right;
+}
+.boxRate {
+	margin: 0 auto;
+	width: 330px;
+	padding-top: 10px;
+}
+.ratingButton {
+	float:right;
+}
