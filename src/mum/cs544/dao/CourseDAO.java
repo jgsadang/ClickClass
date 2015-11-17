@@ -21,5 +21,7 @@ public interface CourseDAO extends JpaRepository <Course, Integer>{
 	public List<Course> findByInstructor_Id(int id );
 	
 	int deleteById(int id);
+	
+	public List<Course> findByStatus(String status);
 
 }

@@ -1,5 +1,7 @@
 package mum.cs544.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +14,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="users")
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 5658716793957904104L;
 	@Id
 	@GeneratedValue
 	private int id;

@@ -1,4 +1,4 @@
-/*package mum.cs544.controller;
+package mum.cs544.controller;
 
 import java.security.Principal;
 import java.util.List;
@@ -21,44 +21,43 @@ public class AdminController {
 	@Autowired
 	CourseService courseService;
 	
-	@RequestMapping(value = "/pendingProducts", method = RequestMethod.GET)
+	@RequestMapping(value = "/pendingCourses", method = RequestMethod.GET)
 	public String pendingProducts(Course course, Model model) {
-		List<Course> p = courseService.findPendingCourses();
-		model.addAttribute("Courses", p);
+		List<Course> cour = courseService.findPendingCourses("pending");
+		model.addAttribute("Courses", cour);
 
-		if (p.isEmpty()) {
-			model.addAttribute("noproduct", "empty");
+		if (cour.isEmpty()) {
+			model.addAttribute("noCourse", "No Pending Course");
 		}
 
-		return "pendingProducts";
+		return "instructorCourses";
 	}
 
 	@RequestMapping(value = "/approveCourse")
 	public String approveCourse(@ModelAttribute Course course,
-			@RequestParam("id") String id, Model model, Principal principal) {
+			@RequestParam("id") Integer id, Model model, Principal principal) {
 
-		Course newCourse = courseService.find(Long.parseLong(id));
-		course.setApproval("approved");
+		Course newCourse = courseService.getCourse(id);
+		newCourse.setStatus("approved");
 
 		courseService.save(newCourse);
 
-		return "redirect:/pendingProducts";
+		return "redirect:/pendingCourses";
 	}
 
-	@RequestMapping(value = "/disapproveProduct")
-	public String disapproveCourse(@ModelAttribute Product product,
-			@RequestParam("id") String id, Model model) {
+	@RequestMapping(value = "/disapproveCourse")
+	public String disapproveCourse(@ModelAttribute Course course,
+			@RequestParam("id") Integer id, Model model) {
 
-		Course newproduct = courseService.find(Long.parseLong(id));
-		newproduct.setApproval("disapproved");
+		Course newproduct = courseService.getCourse(id);
+		newproduct.setStatus("disapproved");
 
 		courseService.save(newproduct);
 
-		return "redirect:/pendingProducts";
+		return "redirect:/pendingCourses";
 
 	}
 	
 
 
 }
-*/

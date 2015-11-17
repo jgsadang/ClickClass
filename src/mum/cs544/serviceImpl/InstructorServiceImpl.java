@@ -31,6 +31,6 @@ public class InstructorServiceImpl implements InstructorService {
 	@Override
 	public Instructor getInstructorByUserName(String userName) {
 		
-		return instructorDAO.findInstructorByUserName(userName);
+		return instructorDAO.findByUser_Username(userName);
 	}
 }

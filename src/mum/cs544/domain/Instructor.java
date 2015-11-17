@@ -1,5 +1,6 @@
 package mum.cs544.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -7,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Instructor extends Person {
+public class Instructor extends Person implements Serializable {
+    private static final long serialVersionUID = 5658716793957904104L;
+    
 	
 	@OneToMany(mappedBy="instructor")
 	private List<Course> courses ;

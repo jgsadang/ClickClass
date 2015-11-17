@@ -7,9 +7,11 @@ import java.io.FileOutputStream;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,7 +47,12 @@ public class CourseController implements ServletContextAware {
 	}
 	
 	@RequestMapping(value = "/addCourse", method=RequestMethod.POST)
-	public String addCoursePost(@RequestParam("file") MultipartFile[] files, Model model, Course course) {
+	public String addCoursePost(@RequestParam("file") MultipartFile[] files, Model model, Course course,
+			@RequestParam("update") String update) 
+	{
+    
+		
+		
 		if (files.length != 2) {
 			return "uploadError";
 		}
@@ -76,12 +83,22 @@ public class CourseController implements ServletContextAware {
 				return "uploadError";
 			}
 		}
-		Instructor instructor = instructorService.getInstructor(1);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName(); //get logged in username
+		Instructor instructor = instructorService.getInstructorByUserName(username);
+		
 		course.setInstructor(instructor);
 		course.setThumburl(files[0].getOriginalFilename());
 		course.setVideo(files[1].getOriginalFilename());
+		
+		
+		course.setStatus("pending");
+		
 		courseService.save(course);
-		return "home";
+		return "redirect:/loginsucess";
+		
+		
 	}
 	
 	/*@RequestMapping(value = "/resources/CourseVideos/{resource}", method=RequestMethod.GET)
@@ -92,6 +109,8 @@ public class CourseController implements ServletContextAware {
 	
 	@RequestMapping(value = "/showCourse", method=RequestMethod.GET)
 	public String showCourse(@RequestParam Integer id, Model model) {
+		
+		
 		Course course = this.courseService.getCourse(id);
 		Instructor instructor = course.getInstructor();
 		model.addAttribute("instructor", instructor);
@@ -106,5 +125,23 @@ public class CourseController implements ServletContextAware {
 		model.addAttribute("course", course);
 		return "viewCourse";
 	}
+	 
+	@RequestMapping(value = "/editCourse", method=RequestMethod.GET)
+	public String editCourse(Course course ,Model model,@RequestParam("id") Integer id) {
+		
+		model.addAttribute("course", courseService.getCourse(id));
+		
+		
+		return "addCourse";
+	}
+	
+	
+	
+	
+	@ModelAttribute
+	public void init(Model model) {
+		model.addAttribute("categories", Category.values());
+	}
+	
 	
 }

@@ -6,12 +6,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import mum.cs544.domain.Instructor;
+import mum.cs544.domain.Student;
 
 @Repository
 public interface InstructorDAO extends JpaRepository <Instructor, Integer>{
 	
 	
-	@Query("SELECT i FROM Instructor i WHERE i.user.username = :userName")
-	public Instructor findInstructorByUserName(@Param(value = "userName") String userName);
+	/*@Query("SELECT i FROM Instructor i WHERE i.user.username = :userName")
+	public Instructor findInstructorByUserName(@Param(value = "userName") String userName);*/
+	
+	public Instructor findByUser_Username(String userName);
 
 }

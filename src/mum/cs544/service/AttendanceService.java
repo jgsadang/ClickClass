@@ -14,4 +14,6 @@ public interface AttendanceService {
 	public List<Attendance> getCourseByStudentId(int id);
 	
 	public Attendance getAttendance(Student student, Course course);
+	
+	public List<Attendance> getAll();
 }

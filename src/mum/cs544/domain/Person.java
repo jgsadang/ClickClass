@@ -1,5 +1,7 @@
 package mum.cs544.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Person {
+public class Person implements Serializable {
+    private static final long serialVersionUID = 5658716793957904104L;
 	
 	@Id
 	@GeneratedValue

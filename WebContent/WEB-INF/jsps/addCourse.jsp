@@ -20,6 +20,10 @@
 	</div>
 		<div id="menu">
 		<div class="menuRight">
+		<a href="${pageContext.request.contextPath}/myCourses">View Courses</a>
+		<a href="#">  |  </a>
+		<a href="${pageContext.request.contextPath}/addCourse">Upload Course</a>
+		 <h> <strong>Hi ${user.firstName}</strong></h>
 			<a href="${pageContext.request.contextPath}/logout"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
        		<a href="${pageContext.request.contextPath}/"><img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" /> </a>
 		</div>
@@ -33,7 +37,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2">Title:</label>
 				<div class="col-sm-10">
-				<sf:input name="title" path="title" type="text" size="20" maxlength="20"/> <sf:errors path="title" cssClass="error"></sf:errors><br/>
+				<sf:input name="title" path="title" type="text" size="20" maxlength="20" value="${course.title}"/> <sf:errors path="title" cssClass="error"></sf:errors><br/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -49,25 +53,25 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2">Price:</label>
 				<div class="col-sm-10">
-				<sf:input name="price" path="price"  type="text" size="20" maxlength="20"/><sf:errors path="price" cssClass="error"></sf:errors><br/>
+				<sf:input name="price" path="price"  type="text" size="20" maxlength="20" value="${course.price}"/><sf:errors path="price" cssClass="error"></sf:errors><br/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2">Course Image:</label>
 				<div class="col-sm-10">
-				<input type="file" name="file"><br/>
+				<input type="file" name="file"  /><br/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2">Course video:</label>
 				<div class="col-sm-10">
-				<input type="file" name="file"><br/>	
+				<input type="file" name="file" ><br/>	
 				</div>
 			</div>	
 			<div class="form-group">
 				<label class="control-label col-sm-2">Description:</label>
 				<div class="col-sm-10">
-				<sf:textarea name="description" path="description"  cols="100" rows="8"/><sf:errors path="description" cssClass="error"></sf:errors><br/>
+				<sf:textarea name="description" path="description"  cols="100" rows="8" value="${course.description}"/><sf:errors path="description" cssClass="error"></sf:errors><br/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -75,6 +79,8 @@
 					<input value="Add Course" type="submit"/>
 				</div>
 			</div>
+			<input type="hidden" name=id value="${course.id}"/>
+			<input type="hidden" name=update value="${falsevalue}"/>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		</fieldset>
 		</sf:form>

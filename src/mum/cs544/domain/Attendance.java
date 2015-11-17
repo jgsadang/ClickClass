@@ -1,5 +1,6 @@
 package mum.cs544.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Attendance {
+public class Attendance implements Serializable {
+    private static final long serialVersionUID = 5658716793957904104L;
+    
 	@Id
 	@GeneratedValue
 	private int id;

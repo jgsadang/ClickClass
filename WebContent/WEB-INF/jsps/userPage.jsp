@@ -31,6 +31,7 @@
 			</sec:authorize>
 		</div>
 		<div class="menuRight">
+		
 		<sec:authorize access="hasRole('ROLE_INSTRUCTOR')" >
 		<a href="${pageContext.request.contextPath}/myCourses">View Courses</a>
 		<a href="#">  |  </a>
@@ -39,6 +40,10 @@
 		<sec:authorize access="hasRole('ROLE_STUDENT')" >
 		    <a href="${pageContext.request.contextPath}/studentCourses">Registered Courses </a>
 		 </sec:authorize>
+		 <sec:authorize access="hasRole('ROLE_ADMIN')" >
+		    <a href="${pageContext.request.contextPath}/pendingCourses">Pending Courses </a>
+		 </sec:authorize>
+		 <h> <strong>Hi ${user.firstName}</strong></h>
 		    <%-- <a href="${pageContext.request.contextPath}/"></a> --%>
        		<a href="${pageContext.request.contextPath}/"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
        		<a href="${pageContext.request.contextPath}/logout"><img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" /> </a>

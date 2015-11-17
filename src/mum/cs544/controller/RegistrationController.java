@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import mum.cs544.domain.Administrator;
 import mum.cs544.domain.Instructor;
@@ -20,6 +21,7 @@ import mum.cs544.service.InstructorService;
 import mum.cs544.service.StudentService;
 
 @Controller
+
 public class RegistrationController {
 	
 	

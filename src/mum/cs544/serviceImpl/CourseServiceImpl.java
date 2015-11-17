@@ -47,4 +47,10 @@ public class CourseServiceImpl implements CourseService {
 	public int deletById(int id) {
 		return courseDAO.deleteById(id);
 	}
+
+	@Override
+	public List<Course> findPendingCourses(String status) {
+		
+		return courseDAO.findByStatus(status);
+	}
 }

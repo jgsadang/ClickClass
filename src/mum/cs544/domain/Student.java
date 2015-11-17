@@ -1,5 +1,6 @@
 package mum.cs544.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,7 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Student extends Person {
+public class Student extends Person implements Serializable {
+    private static final long serialVersionUID = 5658716793957904104L;
 	
 	@OneToMany(mappedBy="student" )
 	private List<Attendance> attendances;

@@ -1,12 +1,17 @@
 package mum.cs544.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Embeddable
-public class Address {
+public class Address  implements Serializable {
+    private static final long serialVersionUID = 5658716793957904104L;
+    
+    
 	@NotEmpty(message = "Can not be left blank")
 	private String street;
 	@Pattern(regexp = "^\\d{5}(-\\d{4})?$", message = "should be nnnnn-nnnn format")

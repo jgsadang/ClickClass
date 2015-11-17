@@ -1,5 +1,7 @@
 package mum.cs544.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,7 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 @Entity
-public class Course {
+public class Course implements Serializable {
+    private static final long serialVersionUID = 5658716793957904104L;
+    
 	@Id
 	@GeneratedValue
 	private int id;
@@ -26,7 +30,7 @@ public class Course {
 	private int rating;
 	private String thumburl;
 	private String video;
-	@Transient
+	
 	private String status;
 	
 	public String getStatus() {

@@ -19,5 +19,7 @@ public interface CourseService {
 	public List<Course> getCourses();
 	
 	public int deletById(int id );
+	
+	public List<Course> findPendingCourses(String status);
 
 }

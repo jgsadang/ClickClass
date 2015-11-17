@@ -1,11 +1,15 @@
 package mum.cs544.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class CreditCard {
+public class CreditCard implements Serializable {
+    private static final long serialVersionUID = 5658716793957904104L;
+    
 	@Id
 	@GeneratedValue
 	private long id;
