@@ -3,8 +3,11 @@ package mum.cs544.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,10 +23,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import mum.cs544.domain.Attendance;
 import mum.cs544.domain.Category;
+import mum.cs544.domain.Comment;
 import mum.cs544.domain.Course;
 import mum.cs544.domain.Instructor;
 import mum.cs544.domain.Student;
 import mum.cs544.service.AttendanceService;
+import mum.cs544.service.CommentService;
 import mum.cs544.service.CourseService;
 import mum.cs544.service.InstructorService;
 import mum.cs544.service.StudentService;
@@ -38,6 +43,8 @@ public class CourseController implements ServletContextAware {
 	private StudentService studentService;	
 	@Autowired
 	private AttendanceService attendanceService;	
+	@Autowired
+	private CommentService commentService;
 	@Autowired
 	ServletContext servletContext;
 	
@@ -112,13 +119,32 @@ public class CourseController implements ServletContextAware {
 	}*/
 	
 	@RequestMapping(value = "/showCourse", method=RequestMethod.GET)
-	public String showCourse(@RequestParam Integer id, Model model) {
-		
-		
-		Course course = this.courseService.getCourse(id);
+	public String showCourse(@RequestParam Integer id, Model model, HttpServletRequest request) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName(); //get logged in username
+	    Course course = this.courseService.getCourse(id);
+	    List<Comment> comments = this.commentService.getCommentsByCourse(course);
+	    if (request.isUserInRole("ROLE_STUDENT")) {
+	    	Student student = this.studentService.getStudent(username);
+		    if (student != null ) {
+		    	Attendance attend = this.attendanceService.getAttendance(student, course);
+		    	if (attend != null) {
+		    		model.addAttribute("student", student);
+		    	}
+		    }
+	    }
+	    if (request.isUserInRole("ROLE_INSTRUCTOR")) {
+	    	if (course.getInstructor().getUser().getUsername().equals(username)) {
+	    		model.addAttribute("student", new Student());
+	    	}
+	    }
+    	if (comments == null) {
+    		comments = new ArrayList<Comment>();
+    	}
 		Instructor instructor = course.getInstructor();
 		model.addAttribute("instructor", instructor);
 		model.addAttribute("course", course);
+    	model.addAttribute("comments", comments);
 		return "showCourse";
 	}
 	
@@ -181,5 +207,38 @@ public class CourseController implements ServletContextAware {
 		Course course = courseService.getCourse(id);
 		model.addAttribute("course", course);
 		return "viewCourse";
+	}
+	@RequestMapping(value = "/addComment", method=RequestMethod.POST)
+	public String addComment(@RequestParam Integer id, @RequestParam String page, @RequestParam String comment, HttpServletRequest request, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName(); //get logged in username
+	    Student student = null;
+	    Course course = this.courseService.getCourse(id);
+	    model.addAttribute("course", course);
+	    if (request.isUserInRole("ROLE_STUDENT")) {
+	    	student = this.studentService.getStudent(username);
+	    } else if (request.isUserInRole("ROLE_INSTRUCTOR")) {
+	    	if (course.getInstructor().getUser().getUsername().equals(username)) {
+	    		student = new Student();
+	    		model.addAttribute("student", student);
+	    	}
+	    }
+
+	    if (student != null && comment != null && !comment.equals("")) {
+	    	Comment com = new Comment();
+	    	com.setCourse(course);
+	    	com.setText(comment);
+	    	com.setUsername(username);
+	    	this.commentService.save(com);
+	    	model.addAttribute("student", student);
+	    }
+    	List<Comment> comments = this.commentService.getCommentsByCourse(course);
+    	if (comments == null) {
+    		comments = new ArrayList<Comment>();
+    	}
+		Instructor instructor = course.getInstructor();
+		model.addAttribute("instructor", instructor);
+    	model.addAttribute("comments", comments);
+		return page;
 	}
 }

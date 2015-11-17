@@ -1,6 +1,7 @@
 package mum.cs544.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 @Entity
@@ -32,6 +34,9 @@ public class Course implements Serializable {
 	private String video;
 	
 	private String status;
+	
+	@OneToMany(mappedBy="course")
+	private List<Comment> comments ;
 	
 	public String getStatus() {
 		return status;
@@ -93,5 +98,11 @@ public class Course implements Serializable {
 	}
 	public void setRating(int rating) {
 		this.rating = rating;
+	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 }

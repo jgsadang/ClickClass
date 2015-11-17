@@ -71,6 +71,37 @@
    				<label>About the course</label><p>${course.description}</p> 
 	    	</div>
 		</div>
+		<section class="container">
+		<h3>Comments</h3>
+		<ul>
+			<c:forEach var="comment" items="${comments}">
+	    		<li>${comment.text}</li>
+			</c:forEach>
+		</ul>
+		<hr>
+		<c:if test="${student != null}">
+		<form method="post" action="${pageContext.request.contextPath}/addComment">
+			<fieldset>
+				<input type="hidden" name="id" value="${course.id}"/>
+				<legend>Add Comments</legend>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Comment:</label>
+					<div class="col-sm-10">
+						<textarea name="comment" cols="50" rows="6"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<br/>
+						<input value="Submit" type="submit"/>
+					</div>
+				</div>
+			</fieldset>
+			<input type="hidden" name="page" value="showCourse"/>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		</form>
+		</c:if>
+		</section>
 		<br/>
 		</c:if>
 	</div>
