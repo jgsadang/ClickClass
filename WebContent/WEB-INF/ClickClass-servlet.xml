@@ -40,4 +40,7 @@
       	<!-- setting maximum upload size -->
        	<property name="maxUploadSize" value="100000000" /> 
     </bean>
+    <aop:aspectj-autoproxy />
+    <context:component-scan base-package="mum.cs544.aspect" />
+	<context:annotation-config />
 </beans>
