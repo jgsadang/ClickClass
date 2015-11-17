@@ -2,14 +2,16 @@ package mum.cs544.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Student extends Person {
 	
-	@OneToMany(mappedBy="student")
+	@OneToMany(mappedBy="student" ,fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Attendance> attendances;
 	
 	@OneToOne
@@ -28,5 +30,9 @@ public class Student extends Person {
 
 	public void setAttendances(List<Attendance> attendances) {
 		this.attendances = attendances;
+	}
+	
+	public void addAttendance(Attendance at){
+		attendances.add(at);
 	}
 }

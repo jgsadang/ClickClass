@@ -23,10 +23,12 @@
 	</div>
 		<div id="menu">
 		<div class="menuLeft">
+		<sec:authorize access="hasRole('ROLE_STUDENT')" >
 			<form id="search" method="post" action="${pageContext.request.contextPath}/doSearch">
 				<label>Course:</label> <input name="searchKey" type="text" size="20" maxlength="20"/> <input value="Search" type="submit"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
+			</sec:authorize>
 		</div>
 		<div class="menuRight">
 		<sec:authorize access="hasRole('ROLE_INSTRUCTOR')" >
@@ -35,7 +37,7 @@
 		<a href="${pageContext.request.contextPath}/addCourse">Upload Course</a>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_STUDENT')" >
-		    <a href="${pageContext.request.contextPath}/">Registered Courses </a>
+		    <a href="${pageContext.request.contextPath}/studentCourses">Registered Courses </a>
 		 </sec:authorize>
 		    <%-- <a href="${pageContext.request.contextPath}/"></a> --%>
        		<a href="${pageContext.request.contextPath}/"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>

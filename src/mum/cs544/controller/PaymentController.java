@@ -1,7 +1,9 @@
 package mum.cs544.controller;
 
 import java.io.InputStream;
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,12 +27,15 @@ import com.paypal.api.payments.Transaction;
 import com.paypal.core.rest.APIContext;
 import com.paypal.core.rest.OAuthTokenCredential;
 import com.paypal.core.rest.PayPalRESTException;
-import com.paypal.core.rest.PayPalResource;
 
+import mum.cs544.domain.Attendance;
 import mum.cs544.domain.Course;
 import mum.cs544.domain.CreditCard;
+import mum.cs544.domain.Student;
+import mum.cs544.service.AttendanceService;
 import mum.cs544.service.CourseService;
 import mum.cs544.service.InstructorService;
+import mum.cs544.service.StudentService;
 
 @Controller
 public class PaymentController implements ServletContextAware {
@@ -41,6 +46,16 @@ public class PaymentController implements ServletContextAware {
 	
 	@Autowired
 	ServletContext servletContext;
+	
+	@Autowired
+	StudentService studentService;
+	
+	@Autowired
+	AttendanceService attendanceService;
+	
+	
+
+	
 	
 	public void setServletContext(ServletContext servletContext) {
 	     this.servletContext = servletContext;
@@ -71,7 +86,9 @@ public class PaymentController implements ServletContextAware {
 	}
 	
 	@RequestMapping(value = "/paymentSuccess", method=RequestMethod.GET)
-	public String paymentSuccess(Model model, Course course) {
+	public String paymentSuccess(Model model, Course course , Principal principal) {
+		
+		
 		return "paymentSuccess";
 	}
 	

@@ -34,5 +34,20 @@ public class StudentServiceImpl implements StudentService {
 		studentDao.save(student);
 		
 	}
+	
+	
+	@Override
+	public Student getStudentByUserName(String userName) {
+		
+		return studentDao.findByUser_Username(userName);
+	}
 
+	/*@Override
+	public void updateStudent(int  studentId) {
+		
+		studentDao.updateStudent(studentId);
+		
+	}*/
 }
+
+

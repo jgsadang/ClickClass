@@ -18,10 +18,11 @@
 
 	<!-- <http pattern="/index.jsp" security="none" /> -->
 	<!-- <security:intercept-url pattern="/login" filters="none"/> -->
-<http auto-config="true">
+<http auto-config="true" create-session="always">
 
-	  <intercept-url pattern="/**" method="POST" access="ROLE_ADMIN" /> 
+	  <!-- <intercept-url pattern="/**" method="POST" access="ROLE_ADMIN" />  -->
 	    <intercept-url pattern="/addCourse" method="GET" access="ROLE_INSTRUCTOR" />
+	    <intercept-url pattern="/payCourse" method="GET" access="ROLE_INSTRUCTOR,ROLE_STUDENT,ROLE_ADMIN" />
 		<intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/> 
 		<intercept-url pattern="/welcome" access="IS_AUTHENTICATED_ANONYMOUSLY"/> 
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET" />
@@ -30,7 +31,7 @@
 		<form-login login-page="/login" default-target-url="/loginsucess"
 			always-use-default-target="false" authentication-failure-url="/loginfailed" />
 		<logout logout-success-url="/logout" logout-url="/doLogout" />
-
+       <logout delete-cookies="JSESSIONID" />
 	</http>
 
 

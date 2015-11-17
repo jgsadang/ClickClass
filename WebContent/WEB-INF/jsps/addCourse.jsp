@@ -20,7 +20,7 @@
 	</div>
 		<div id="menu">
 		<div class="menuRight">
-			<a href="${pageContext.request.contextPath}/"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
+			<a href="${pageContext.request.contextPath}/logout"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
        		<img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" />
 		</div>
 	</div>
