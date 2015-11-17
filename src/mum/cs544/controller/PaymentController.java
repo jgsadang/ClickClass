@@ -1,9 +1,9 @@
 package mum.cs544.controller;
 
 import java.io.InputStream;
-import java.security.Principal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +11,13 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.ServletContextAware;
 
 import com.paypal.api.payments.Address;
@@ -43,52 +46,73 @@ public class PaymentController implements ServletContextAware {
 	private InstructorService instructorService;
 	@Autowired
 	private CourseService courseService;
+	@Autowired
+	private StudentService studentService;
+	@Autowired
+	private AttendanceService attendanceService;
 	
 	@Autowired
 	ServletContext servletContext;
-	
-	@Autowired
-	StudentService studentService;
-	
-	@Autowired
-	AttendanceService attendanceService;
-	
-	
-
-	
 	
 	public void setServletContext(ServletContext servletContext) {
 	     this.servletContext = servletContext;
 	}
 	
 	@RequestMapping(value = "/payCourse", method=RequestMethod.POST)
-	public String payCourse(Model model) {
-		CreditCard cc = new CreditCard();
-		model.addAttribute("creditCard", cc);
-		return "payment";
+	public String payCourse(Model model, @RequestParam Integer id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName(); //get logged in username
+	    Student student = this.studentService.getStudent(username);
+	    if (student != null) {
+	    	Course course = this.courseService.getCourse(id);
+	    	Attendance attendance = this.attendanceService.getAttendance(student, course);
+	    	if (attendance!=null) {
+	    		model.addAttribute("course", course);
+	    		return "viewCourse";
+	    	}
+	    	mum.cs544.domain.Address address = student.getAddress();
+	    	CreditCard cc = new CreditCard();
+	    	model.addAttribute("creditCard", cc);
+	    	model.addAttribute("course", course);
+	    	model.addAttribute("address", address);
+	    	model.addAttribute("student", student);
+	    	return "payment";
+	    } else {
+	    	return "redirect:/login";
+	    }
 	}
 	
 	@RequestMapping(value = "/submitPayment", method=RequestMethod.POST)
-	public String submitPayment(Model model, Course course) {
+	public String submitPayment(Model model, Course course, mum.cs544.domain.Address address, mum.cs544.domain.CreditCard cc) {
 		
-		InputStream is = this.servletContext.getResourceAsStream("/resources/sdk_config.properties");
-		try {
-			Payment.initConfig(is);
-			//OAuthTokenCredential tokenCredential = Payment.
-			//createPayment();
-			//Successful payment
-			return "redirect:/paymentSuccess";
-		} catch (PayPalRESTException e) {
-			System.out.println(e.getMessage());
-		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName(); //get logged in username
+	    Student student = this.studentService.getStudent(username);
+	    if (student != null) {
+	    	InputStream is = this.servletContext.getResourceAsStream("/resources/sdk_config.properties");
+			try {
+				Payment.initConfig(is);
+				//OAuthTokenCredential tokenCredential = Payment.
+				//createPayment();
+				//Successful payment
+				course = this.courseService.getCourse(course.getId());
+				Attendance attendance = new Attendance();
+				attendance.setCourse(course);
+				attendance.setStudent(student);
+				attendance.setDate(Date.valueOf(LocalDate.now()));
+				attendanceService.save(attendance);
+				model.addAttribute("course", course);
+				return "paymentSuccess";
+			} catch (PayPalRESTException e) {
+				System.out.println(e.getMessage());
+			}
+	    } 
 		//Error return back to payment page
 		return "payment";
 	}
 	
 	@RequestMapping(value = "/paymentSuccess", method=RequestMethod.GET)
-	public String paymentSuccess(Model model, Course course , Principal principal) {
-		
-		
+	public String paymentSuccess(Model model, Course course) {
 		return "paymentSuccess";
 	}
 	

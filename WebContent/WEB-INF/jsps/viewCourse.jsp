@@ -25,10 +25,10 @@
 		</div>
 	</div>
 	<div id="main">
-		<c:if test="${course == null}">
+		<c:if test="${course != null}">
 			<div id="viddeoPlayer">
 				<video width="480" height="360"  controls>
-	  				<source src="resources/CourseVideos/5u8rFbpdvds.mp4" type="video/mp4">  					
+	  				<source src="resources/CourseVideos/${course.video}" type="video/mp4">  					
 					Your browser does not support the video tag.
 				</video>
 			</div>

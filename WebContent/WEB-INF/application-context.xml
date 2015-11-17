@@ -45,4 +45,5 @@
 		up static resources in the ${webappRoot}/resources/ directory -->
 	<jpa:repositories base-package="mum.cs544.dao"/>
 
+
  </beans>

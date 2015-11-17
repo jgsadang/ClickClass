@@ -27,37 +27,79 @@
 	<div id="main">
 		<section class="container">
 		<!-- Add web content here -->
-	  	<sf:form method="post" action="${pageContext.request.contextPath}/submitPayment" commandName="creditCard" class="form-horizontal" role="form">
+	  	<form method="post" action="${pageContext.request.contextPath}/submitPayment" class="form-horizontal" role="form">
 		<fieldset>
-			<legend>Payment</legend>
+			<legend>Payment: $${course.price} for ${course.title}</legend>
 			<div class="form-group">
 				<label class="control-label col-sm-2">Name on card:</label>
 				<div class="col-sm-10">
-				<sf:input name="nameOnCard" path="nameOnCard" type="text" size="20" maxlength="20"/> <sf:errors path="nameOnCard" cssClass="error"></sf:errors><br/>
+				<input name="nameOnCard" type="text" size="20" maxlength="20" value="${student.firstName} ${student.lastName}"/> <br/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2">Card type:</label>
+				<div class="col-sm-10">
+				<select name="type">
+					<option>mastercard</option>
+					<option>visa</option>
+				</select>
+				<br/>
 				</div>
 			</div>
 			<div class="form-group">
 			<label class="control-label col-sm-2">CC Number:</label>
 				<div class="col-sm-10">
-				<sf:input name="nameOnCard" path="nameOnCard" type="text" size="20" maxlength="20"/> <sf:errors path="nameOnCard" cssClass="error"></sf:errors><br/>
+				<input name="ccNo" type="text" size="20" maxlength="20" value="${creditCard.ccNo}"/> <br/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2">Expire Month:</label>
 				<div class="col-sm-10">
-				<sf:input name="expireMonth" path="expireMonth"  type="text" size="20" maxlength="20"/><sf:errors path="expireMonth" cssClass="error"></sf:errors><br/>
+				<input name="expireMonth" type="text" size="20" maxlength="20" value="${creditCard.expireMonth}"/><br/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2">Expire Year:</label>
 				<div class="col-sm-10">
-				<sf:input name="expireYear" path="expireYear"  type="text" size="20" maxlength="20"/><sf:errors path="expireYear" cssClass="error"></sf:errors><br/>
+				<input name="expireYear" type="text" size="20" maxlength="20" value="${creditCard.expireYear}"/><br/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2">CVV</label>
 				<div class="col-sm-10">
-				<sf:input name="cvv" path="cvv"  type="text" size="20" maxlength="20"/><sf:errors path="cvv" cssClass="error"></sf:errors><br/>
+				<input name="cvv"type="text" size="20" maxlength="20" value="${creditCard.cvv}"/><br/>
+				</div>
+			</div>
+			<!-- Address -->
+			<br/>
+			<div class="form-group">
+				<label class="control-label col-sm-2">Street:</label>
+				<div class="col-sm-10">
+				<input name="street" type="text" size="20" maxlength="20" value="${address.street}"/> <br/>
+				</div>
+			</div>
+			<div class="form-group">
+			<label class="control-label col-sm-2">Zip Code:</label>
+				<div class="col-sm-10">
+				<input name="zipcode" type="text" size="20" maxlength="20" value="${address.zipcode}"/><br/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2">City:</label>
+				<div class="col-sm-10">
+				<input name="city" type="text" size="20" maxlength="20" value="${address.city}"/><br/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2">State:</label>
+				<div class="col-sm-10">
+				<input name="state" type="text" size="20" maxlength="20" value="${address.state}"/><br/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2">Country:</label>
+				<div class="col-sm-10">
+				<input name="country" type="text" size="20" maxlength="20" value="${address.country}"/><br/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -65,9 +107,10 @@
 					<input value="Submit Payment" type="submit"/>
 				</div>
 			</div>
+			<input type="hidden" name="id" value="${course.id}"/>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		</fieldset>
-		</sf:form>
+		</form>
 	</section>
 	</div>
 </body>
