@@ -172,8 +172,11 @@ public class CourseController implements ServletContextAware {
 	    		attendance.setRating(userRating);
 	    		this.attendanceService.save(attendance);
 	    		model.addAttribute("attendance", attendance);
-				double rating = (userRating + course.getRating())/2;
-				int rate = (int)Math.round(rating);
+	    		int rate = userRating;
+	    		if (course.getRating() > 0) {
+					double rating = (userRating + course.getRating())/2;
+					rate = (int)Math.round(rating);
+	    		}
 				course.setRating(rate);
 				this.courseService.save(course);
 	    	}
