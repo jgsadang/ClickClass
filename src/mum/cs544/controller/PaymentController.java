@@ -67,6 +67,7 @@ public class PaymentController implements ServletContextAware {
 	    	Course course = this.courseService.getCourse(id);
 	    	Attendance attendance = this.attendanceService.getAttendance(student, course);
 	    	if (attendance!=null) {
+	    		model.addAttribute("attendance", attendance);
 	    		model.addAttribute("course", course);
 	    		return "viewCourse";
 	    	}

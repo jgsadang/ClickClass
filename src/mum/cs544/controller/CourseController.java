@@ -18,11 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
+import mum.cs544.domain.Attendance;
 import mum.cs544.domain.Category;
 import mum.cs544.domain.Course;
 import mum.cs544.domain.Instructor;
+import mum.cs544.domain.Student;
+import mum.cs544.service.AttendanceService;
 import mum.cs544.service.CourseService;
 import mum.cs544.service.InstructorService;
+import mum.cs544.service.StudentService;
 
 @Controller
 public class CourseController implements ServletContextAware {
@@ -30,7 +34,10 @@ public class CourseController implements ServletContextAware {
 	private InstructorService instructorService;
 	@Autowired
 	private CourseService courseService;
-	
+	@Autowired
+	private StudentService studentService;	
+	@Autowired
+	private AttendanceService attendanceService;	
 	@Autowired
 	ServletContext servletContext;
 	
@@ -120,7 +127,16 @@ public class CourseController implements ServletContextAware {
 	
 	@RequestMapping(value = "/viewCourse", method=RequestMethod.POST)
 	public String viewCourse(@RequestParam Integer id, Model model) {
-		//redirect to home
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName(); //get logged in username
+	    Student student = this.studentService.getStudent(username);
+	    if (student != null) {
+	    	Course course = this.courseService.getCourse(id);
+	    	Attendance attendance = this.attendanceService.getAttendance(student, course);
+	    	if (attendance!=null) {
+	    		model.addAttribute("attendance", attendance);
+	    	}
+	    }
 		Course course = courseService.getCourse(id);
 		model.addAttribute("course", course);
 		return "viewCourse";
@@ -143,5 +159,27 @@ public class CourseController implements ServletContextAware {
 		model.addAttribute("categories", Category.values());
 	}
 	
-	
+	@RequestMapping(value = "/submitRating", method=RequestMethod.POST)
+	public String submitRating(@RequestParam Integer id, Model model, @RequestParam Integer userRating) {
+		//redirect to home
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName(); //get logged in username
+	    Student student = this.studentService.getStudent(username);
+	    if (student != null) {
+	    	Course course = this.courseService.getCourse(id);
+	    	Attendance attendance = this.attendanceService.getAttendance(student, course);
+	    	if (attendance!=null) {
+	    		attendance.setRating(userRating);
+	    		this.attendanceService.save(attendance);
+	    		model.addAttribute("attendance", attendance);
+				double rating = (userRating + course.getRating())/2;
+				int rate = (int)Math.round(rating);
+				course.setRating(rate);
+				this.courseService.save(course);
+	    	}
+	    }
+		Course course = courseService.getCourse(id);
+		model.addAttribute("course", course);
+		return "viewCourse";
+	}
 }

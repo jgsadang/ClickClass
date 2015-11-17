@@ -26,6 +26,7 @@
 	    <intercept-url pattern="/payCourse" method="POST" access="ROLE_STUDENT" />
 	    <intercept-url pattern="/submitPayment" method="POST" access="ROLE_STUDENT" />
 	    <intercept-url pattern="/viewCourse" method="POST" access="ROLE_STUDENT" />
+	    <intercept-url pattern="/submitRating" method="POST" access="ROLE_STUDENT" />
 	   	<intercept-url pattern="/**" method="POST" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/> 
 		<intercept-url pattern="/welcome" access="IS_AUTHENTICATED_ANONYMOUSLY"/> 
