@@ -22,6 +22,7 @@
 
  
 	    <intercept-url pattern="/addCourse" method="GET" access="ROLE_INSTRUCTOR" />
+	    <intercept-url pattern="/addCourse*" method="POST" access="ROLE_INSTRUCTOR" />
 	    <intercept-url pattern="/payCourse" method="POST" access="ROLE_STUDENT" />
 	    <intercept-url pattern="/submitPayment" method="POST" access="ROLE_STUDENT" />
 	    <intercept-url pattern="/viewCourse" method="POST" access="ROLE_STUDENT" />
