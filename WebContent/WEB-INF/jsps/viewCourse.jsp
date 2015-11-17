@@ -41,8 +41,9 @@
        		<a href="${pageContext.request.contextPath}/logout"><img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" /></a>
 		</div>
 	</div>
-	<div id="main">
+	<div >
 		<c:if test="${course != null}">
+			<h2 class="boxRate">${course.title}</h2><br/>
 			<div id="viddeoPlayer">
 				<video width="480" height="360"  controls>
 	  				<source src="resources/CourseVideos/${course.video}" type="video/mp4"  >  					
