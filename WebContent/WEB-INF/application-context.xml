@@ -16,7 +16,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />	
 		<property name="url" value="jdbc:mysql://localhost/courseDB" />
 		<property name="username" value="root" />	
-		<property name="password" value="" />	
+		<property name="password" value="lunes123" />	
 	</bean>
 	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
 	<!-- Session Factory Declaration -->
@@ -30,7 +30,7 @@
 				<prop key="hibernate.use_sql_comments">true</prop>
 				<prop key="hibernate.hibernate.format_sql">false</prop>
 				<prop key="hibernate.connection.pool_size">10</prop>				
-				<!--  <prop key="hibernate.hbm2ddl.auto">create</prop>  -->
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
 			</props>
 		</property>
 		<property name="packagesToScan" value="mum.cs544.domain"/>
