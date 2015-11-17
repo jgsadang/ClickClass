@@ -21,12 +21,14 @@
 <http auto-config="true" create-session="always">
 
 	  <!-- <intercept-url pattern="/**" method="POST" access="ROLE_ADMIN" />  -->
-	    <intercept-url pattern="/addCourse" method="GET" access="ROLE_INSTRUCTOR" />
-	    <intercept-url pattern="/payCourse" method="GET" access="ROLE_INSTRUCTOR,ROLE_STUDENT,ROLE_ADMIN" />
-		<intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/> 
-		<intercept-url pattern="/welcome" access="IS_AUTHENTICATED_ANONYMOUSLY"/> 
-		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET" />
-		
+	  <intercept-url pattern="/addCourse" method="GET" access="ROLE_INSTRUCTOR" />
+	   <intercept-url pattern="/addCourse*" method="POST" access="ROLE_INSTRUCTOR" />
+ 	    <intercept-url pattern="/payCourse" method="POST" access="ROLE_STUDENT" />
+ 	    <intercept-url pattern="/submitPayment" method="POST" access="ROLE_STUDENT" />
+ 	    <intercept-url pattern="/viewCourse" method="POST" access="ROLE_STUDENT" />
+	  
+	  
+
 	
 		<form-login login-page="/login" default-target-url="/loginsucess"
 			always-use-default-target="false" authentication-failure-url="/loginfailed" />
