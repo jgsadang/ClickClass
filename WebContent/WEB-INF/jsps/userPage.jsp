@@ -52,7 +52,7 @@
 		</div>
 	</div>
 	<div id="main">
-
+<section class="container">
 		<c:if test="${not empty noCourse}">
 			<div class="alert alert-success">
 				${noCourse}<br />
@@ -73,6 +73,7 @@
 		</div>
 		<br/>
 		</c:if>
+		</section>
 	</div>
 </body>
 </html>
