@@ -25,6 +25,14 @@ public class Course {
 	private int rating;
 	private String thumburl;
 	private String video;
+	private String status;
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getThumburl() {
 		return thumburl;
 	}
