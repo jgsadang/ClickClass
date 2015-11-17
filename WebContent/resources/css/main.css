@@ -114,3 +114,15 @@ body {
 .ratingButton {
 	float:right;
 }
+.username {
+	color: blue;
+}
+.comment {
+	border-style: dotted;
+	border-width: 2px;
+    border-color: #90D050;
+    margin: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}

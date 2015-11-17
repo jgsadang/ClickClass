@@ -73,11 +73,9 @@
 		</div>
 		<section class="container">
 		<h3>Comments</h3>
-		<ul>
 			<c:forEach var="comment" items="${comments}">
-	    		<li>${comment.text}</li>
+	    		<div class="comment"><label class="username">${comment.username}</label> ${comment.text}</div>
 			</c:forEach>
-		</ul>
 		<hr>
 		<c:if test="${student != null}">
 		<form method="post" action="${pageContext.request.contextPath}/addComment">
