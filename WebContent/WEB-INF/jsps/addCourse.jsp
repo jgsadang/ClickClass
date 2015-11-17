@@ -21,7 +21,7 @@
 		<div id="menu">
 		<div class="menuRight">
 			<a href="${pageContext.request.contextPath}/logout"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
-       		<img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" />
+       		<a href="${pageContext.request.contextPath}/"><img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" /> </a>
 		</div>
 	</div>
 	<div id="main">

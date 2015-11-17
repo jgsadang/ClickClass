@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Course {
@@ -25,6 +26,7 @@ public class Course {
 	private int rating;
 	private String thumburl;
 	private String video;
+	@Transient
 	private String status;
 	
 	public String getStatus() {

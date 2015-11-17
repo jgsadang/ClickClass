@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Student extends Person {
 	
-	@OneToMany(mappedBy="student" ,fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="student" )
 	private List<Attendance> attendances;
 	
 	@OneToOne

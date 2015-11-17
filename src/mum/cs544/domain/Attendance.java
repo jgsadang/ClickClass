@@ -18,10 +18,10 @@ public class Attendance {
 	@GeneratedValue
 	private int id;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	private Student student;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	private Course course;
 	
 	private int rating;
