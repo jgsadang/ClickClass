@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>  
 <!DOCTYPE html>
@@ -24,6 +25,18 @@
 	</div>
 		<div id="menu">
 		<div class="menuRight">
+		<sec:authorize access="hasRole('ROLE_INSTRUCTOR')" >
+		<a href="${pageContext.request.contextPath}/myCourses">View Courses</a>
+		<a href="#">  |  </a>
+		<a href="${pageContext.request.contextPath}/addCourse">Upload Course</a>
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_STUDENT')" >
+		    <a href="${pageContext.request.contextPath}/studentCourses">Registered Courses </a>
+		 </sec:authorize>
+		 <sec:authorize access="hasRole('ROLE_ADMIN')" >
+		    <a href="${pageContext.request.contextPath}/pendingCourses">Pending Courses </a>
+		 </sec:authorize>
+		 <h> <strong>Hi ${user.firstName}</strong></h>
 			<a href="${pageContext.request.contextPath}/"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
        		<a href="${pageContext.request.contextPath}/logout"><img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" /></a>
 		</div>
@@ -32,7 +45,7 @@
 		<c:if test="${course != null}">
 			<div id="viddeoPlayer">
 				<video width="480" height="360"  controls>
-	  				<source src="resources/CourseVideos/${course.video}" type="video/mp4">  					
+	  				<source src="resources/CourseVideos/${course.video}" type="video/mp4"  >  					
 					Your browser does not support the video tag.
 				</video>
 			</div>

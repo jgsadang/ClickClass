@@ -54,12 +54,9 @@ public class CourseController implements ServletContextAware {
 	}
 	
 	@RequestMapping(value = "/addCourse", method=RequestMethod.POST)
-	public String addCoursePost(@RequestParam("file") MultipartFile[] files, Model model, Course course,
-			@RequestParam("update") String update) 
+	public String addCoursePost(@RequestParam("file") MultipartFile[] files, Model model, Course course) 
 	{
-    
-		
-		
+    	
 		if (files.length != 2) {
 			return "uploadError";
 		}

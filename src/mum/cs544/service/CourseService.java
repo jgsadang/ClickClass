@@ -16,7 +16,7 @@ public interface CourseService {
 	public List<Course> getCoursesByInstructorId (int id);
 
 	public Course getCourse(int id);
-	public List<Course> getCourses();
+	public List<Course> getCourses(String status);
 	
 	public int deletById(int id );
 	

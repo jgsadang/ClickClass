@@ -43,7 +43,9 @@
 		 <sec:authorize access="hasRole('ROLE_ADMIN')" >
 		    <a href="${pageContext.request.contextPath}/pendingCourses">Pending Courses </a>
 		 </sec:authorize>
-		 <h> <strong>Hi ${user.firstName}</strong></h>
+		 <c:if test="${not empty user}">
+		  <h> <strong>Hi ${user.firstName}</strong></h>
+		 </c:if>
 		    <%-- <a href="${pageContext.request.contextPath}/"></a> --%>
        		<a href="${pageContext.request.contextPath}/"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
        		<a href="${pageContext.request.contextPath}/logout"><img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" /> </a>

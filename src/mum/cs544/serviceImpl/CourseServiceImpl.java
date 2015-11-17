@@ -38,8 +38,8 @@ public class CourseServiceImpl implements CourseService {
 		return courseDAO.findByInstructor_Id(id);
 	}
 	
-	public List<Course> getCourses() {
-		return courseDAO.findAll();
+	public List<Course> getCourses(String status) {
+		return courseDAO.findByStatus(status);
 
 	}
 

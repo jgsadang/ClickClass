@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import mum.cs544.domain.Course;
@@ -21,6 +22,8 @@ import mum.cs544.service.CourseService;
 import mum.cs544.service.InstructorService;
 import mum.cs544.service.StudentService;
 
+
+@SessionAttributes("user")
 @Controller
 public class HomeController {
 
@@ -38,7 +41,7 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String showHomepage(Model model) {
-		List<Course> courses = courseService.getCourses();
+		List<Course> courses = courseService.getCourses("approved");
 		model.addAttribute("courses", courses);
 		return "home";
 	}
@@ -68,21 +71,18 @@ public class HomeController {
 	@RequestMapping(value = "/loginsucess", method = RequestMethod.GET)
 	public String loginSucess(Model model, Principal principal, HttpServletRequest request, HttpSession session) {
 
-		/*
-		 * session.setAttribute("name", principal.getName()); String name =
-		 * principal.getName();
-		 */
 
 		if (request.isUserInRole("ROLE_INSTRUCTOR")) {
 
 			model.addAttribute("user", instructorService.getInstructorByUserName(principal.getName()));
-			// session.setAttribute("name", principal.getName());
+			
 		} else if (request.isUserInRole("ROLE_STUDENT")) {
-			// session.setAttribute("name", principal.getName());
+			
 			model.addAttribute("user", studentService.getStudentByUserName(principal.getName()));
 		}
 
 		else {
+			if(adminService.getAdminByUserName(principal.getName())!=null)
 			model.addAttribute("user", adminService.getAdminByUserName(principal.getName()));
 		}
 
@@ -100,6 +100,6 @@ public class HomeController {
 
 	@ModelAttribute
 	public void init(Model model) {
-		model.addAttribute("courses", courseService.getCourses());
+		model.addAttribute("courses", courseService.getCourses("approved"));
 	}
 }
