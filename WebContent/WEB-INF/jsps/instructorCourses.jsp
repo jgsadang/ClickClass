@@ -73,10 +73,10 @@
 							<div class="rating">
 	    			<c:forEach begin="1" end="5" varStatus="loop">
 						<c:if test="${course.rating == loop.count}">
-							<input name="star3" type="radio" class="star" disabled="disabled" checked="checked"/>
+							<input name="${course.id}" type="radio" class="star" disabled="disabled" checked="checked"/>
 						</c:if>
 						<c:if test="${course.rating != loop.count}">
-							<input name="star3" type="radio" class="star" disabled="disabled"/>
+							<input name="${course.id}" type="radio" class="star" disabled="disabled"/>
 						</c:if>
 					</c:forEach>
 				</div>
