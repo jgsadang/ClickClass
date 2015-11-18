@@ -118,7 +118,7 @@ public class PaymentController implements ServletContextAware {
 				System.out.println(e.getMessage());
 			}
 	    }
-	    model.addAttribute("error", "Error encountered, check payment details!");
+	    model.addAttribute("error", "Error encountered, please check your payment details!");
     	model.addAttribute("creditCard", cc);
     	model.addAttribute("course", course);
     	model.addAttribute("address", address);
