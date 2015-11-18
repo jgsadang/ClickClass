@@ -26,6 +26,10 @@
 	</div>
 	<div id="main">
 		<section class="container">
+		<c:if test="${not empty error}">
+			<div class="alert alert-danger"  >${error}<br />
+			</div>
+		</c:if>
 		<!-- Add web content here -->
 	  	<form method="post" action="${pageContext.request.contextPath}/submitPayment" class="form-horizontal" role="form">
 		<fieldset>
