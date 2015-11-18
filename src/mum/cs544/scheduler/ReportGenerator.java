@@ -21,7 +21,7 @@ public class ReportGenerator {
 	@Autowired
 	private AttendanceService attendanceService;
 	
-	@Scheduled(cron="0 0/1 * * * *") 
+	@Scheduled(cron="0 0/5 * * * *") 
 	public void salesReport() {
 		Date date = Date.valueOf(LocalDate.now());
 		List <Attendance> sales = this.attendanceService.getAttendanceByDate(date);
