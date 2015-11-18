@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,6 +21,13 @@
 	</div>
 	 <div id="menu">
 		<div class="menuRight">
+		 <sec:authorize access="hasRole('ROLE_ADMIN')" >
+		    <a href="${pageContext.request.contextPath}/pendingCourses">Pending Courses </a>
+		    <a href=" <spring:url value="/administratorSignUp" />" ><abbr title="Register Admin"><img class="adminLogo" src="resources/images/admin.png" alt="Register Admin" /></abbr> </a>
+		 </sec:authorize>
+		 <c:if test="${not empty user}">
+		  <h> <strong>Hi ${user.firstName}</strong></h>
+		 </c:if>
 			<a href="${pageContext.request.contextPath}/"><img class="homeLogo" src="resources/images/home.jpg" alt="home" /></a>
        		<a href="${pageContext.request.contextPath}/logout"><img class="logoutLogo" src="resources/images/logout.jpg" alt="logout" /> </a>
 		</div>
