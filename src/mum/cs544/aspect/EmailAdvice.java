@@ -48,7 +48,7 @@ public class EmailAdvice {
 	        
 	        System.out.println("--------"+course.getDescription());
 	        
-	        Instructor instructor = instructorService.getInstructor(course.getId());
+	        Instructor instructor = instructorService.getInstructor(course.getInstructor().getId());
 	        
 	       final String toEmail = instructor.getEmail();
 
