@@ -1,5 +1,6 @@
 package mum.cs544.serviceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public List<Attendance> getAll() {
 
 		return attendanceDAO.findAll();
+	}
+	
+	@Override
+	public List<Attendance> getAttendanceByDate(Date date) {
+		return attendanceDAO.findByDate(date);
 	}
 
 }

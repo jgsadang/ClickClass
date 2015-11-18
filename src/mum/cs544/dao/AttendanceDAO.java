@@ -1,6 +1,7 @@
 package mum.cs544.dao;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,6 @@ public interface AttendanceDAO extends JpaRepository <Attendance, Integer>{
 	
 	public List<Attendance> findByStudent_Id(int id);
 	public Attendance findByStudentAndCourse(Student student, Course course);
-	
+	public List<Attendance> findByDate(Date date);
 
 }
