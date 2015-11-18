@@ -69,17 +69,16 @@
 							<!-- <a href="showCourse?id=${course.id}"> -->
 							<img src="resources/CourseImages/${course.thumburl}" alt="view" />
 							<!-- </a> -->
-							<p>Rating</p>
 							<div class="rating">
-	    			<c:forEach begin="1" end="5" varStatus="loop">
-						<c:if test="${course.rating == loop.count}">
-							<input name="${course.id}" type="radio" class="star" disabled="disabled" checked="checked"/>
-						</c:if>
-						<c:if test="${course.rating != loop.count}">
-							<input name="${course.id}" type="radio" class="star" disabled="disabled"/>
-						</c:if>
-					</c:forEach>
-				</div>
+			    			<c:forEach begin="1" end="5" varStatus="loop">
+								<c:if test="${course.rating == loop.count}">
+									<input name="${course.id}" type="radio" class="star" disabled="disabled" checked="checked"/>
+								</c:if>
+								<c:if test="${course.rating != loop.count}">
+									<input name="${course.id}" type="radio" class="star" disabled="disabled"/>
+								</c:if>
+							</c:forEach>
+							</div>
 						</div>
 						<div class="courseDetails">
 							<label>${course.title}</label>
