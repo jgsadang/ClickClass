@@ -40,6 +40,7 @@
 		 </sec:authorize>
 		 <sec:authorize access="hasRole('ROLE_ADMIN')" >
 		    <a href="${pageContext.request.contextPath}/pendingCourses">Pending Courses </a>
+		    <a href=" <spring:url value="/administratorSignUp" />" ><abbr title="Register Admin"><img class="adminLogo" src="resources/images/admin.png" alt="Register Admin" /></abbr> </a>
 		 </sec:authorize>
 		 <c:if test="${not empty user}">
 		  <h> <strong>Hi ${user.firstName}</strong></h>

@@ -5,5 +5,6 @@ import mum.cs544.domain.Administrator;
 public interface AdminService {
 	
 	public Administrator getAdminByUserName(String userName);
-
+	
+	public void saveAdministrator(Administrator administrator);
 }
