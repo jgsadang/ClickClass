@@ -23,12 +23,10 @@
 	</div>
 		<div id="menu">
 		<div class="menuLeft">
-		<sec:authorize access="hasRole('ROLE_STUDENT')" >
 			<form id="search" method="post" action="${pageContext.request.contextPath}/doSearch">
 				<label>Course:</label> <input name="searchKey" type="text" size="20" maxlength="20"/> <input value="Search" type="submit"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
-			</sec:authorize>
 		</div>
 		<div class="menuRight">
 		

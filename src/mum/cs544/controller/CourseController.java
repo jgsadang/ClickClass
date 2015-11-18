@@ -118,6 +118,7 @@ public class CourseController implements ServletContextAware {
 		return resource;
 	}*/
 	
+	
 	@RequestMapping(value = "/showCourse", method=RequestMethod.GET)
 	public String showCourse(@RequestParam Integer id, Model model, HttpServletRequest request) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

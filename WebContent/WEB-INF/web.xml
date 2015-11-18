@@ -43,7 +43,7 @@
   </context-param>
    <context-param>
   	<param-name>payMethod</param-name>
-  	<param-value>none</param-value>
+  	<param-value>payPal</param-value>
   </context-param>
   <filter>
     <filter-name>springSecurityFilterChain</filter-name>
