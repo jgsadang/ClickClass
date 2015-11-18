@@ -37,9 +37,9 @@ public class EmailUtil {
           msg.addHeader("format", "flowed");
           msg.addHeader("Content-Transfer-Encoding", "8bit");
  
-          msg.setFrom(new InternetAddress("no_reply@eselling.com", "NoReply-JD"));
+          msg.setFrom(new InternetAddress("no_reply@cilckclass.com", "NoReply-JD"));
  
-          msg.setReplyTo(InternetAddress.parse("no_reply@eselling.com", false));
+          msg.setReplyTo(InternetAddress.parse("no_reply@cilckclass.com", false));
  
           msg.setSubject(subject, "UTF-8");
  
@@ -72,9 +72,9 @@ public class EmailUtil {
              msg.addHeader("format", "flowed");
              msg.addHeader("Content-Transfer-Encoding", "8bit");
                
-             msg.setFrom(new InternetAddress("no_reply@eselling.com", "NoReply-JD"));
+             msg.setFrom(new InternetAddress("no_reply@cilckclass.com", "NoReply-JD"));
  
-             msg.setReplyTo(InternetAddress.parse("no_reply@eselling.com", false));
+             msg.setReplyTo(InternetAddress.parse("no_reply@cilckclass.com", false));
  
              msg.setSubject(subject, "UTF-8");
  
@@ -136,9 +136,9 @@ public class EmailUtil {
              msg.addHeader("format", "flowed");
              msg.addHeader("Content-Transfer-Encoding", "8bit");
                
-             msg.setFrom(new InternetAddress("no_reply@eselling.com", "NoReply-JD"));
+             msg.setFrom(new InternetAddress("no_reply@cilckclass.com", "NoReply-JD"));
      
-             msg.setReplyTo(InternetAddress.parse("no_reply@eselling.com", false));
+             msg.setReplyTo(InternetAddress.parse("no_reply@cilckclass.com", false));
      
              msg.setSubject(subject, "UTF-8");
      
