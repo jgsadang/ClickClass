@@ -177,10 +177,7 @@ public class CourseController implements ServletContextAware {
 	
 	
 	
-	@ModelAttribute
-	public void init(Model model) {
-		model.addAttribute("categories", Category.values());
-	}
+	
 	
 	@RequestMapping(value = "/submitRating", method=RequestMethod.POST)
 	public String submitRating(@RequestParam Integer id, Model model, @RequestParam Integer userRating) {
@@ -239,6 +236,12 @@ public class CourseController implements ServletContextAware {
 		Instructor instructor = course.getInstructor();
 		model.addAttribute("instructor", instructor);
     	model.addAttribute("comments", comments);
-		return page;
+		
+    	return page;
+	}
+	
+	@ModelAttribute
+	public void init(Model model) {
+		model.addAttribute("categories", Category.values());
 	}
 }

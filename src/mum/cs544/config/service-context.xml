@@ -13,6 +13,7 @@
 	
 	<context:annotation-config />
 	<mvc:annotation-driven />
+	
     <context:component-scan base-package="mum.cs544.service" /> 
      <context:component-scan base-package="mum.cs544.serviceImpl" /> 
     
