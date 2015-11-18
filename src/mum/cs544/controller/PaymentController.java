@@ -94,20 +94,35 @@ public class PaymentController implements ServletContextAware {
 			try {
 				Payment.initConfig(is);
 				//OAuthTokenCredential tokenCredential = Payment.
-				//createPayment();
-				//Successful payment
 				course = this.courseService.getCourse(course.getId());
-				Attendance attendance = new Attendance();
-				attendance.setCourse(course);
-				attendance.setStudent(student);
-				attendance.setDate(Date.valueOf(LocalDate.now()));
-				attendanceService.save(attendance);
-				model.addAttribute("course", course);
-				return "paymentSuccess";
+				Payment createdPayment = null;
+				boolean paymentSuccess = true;
+				if (this.servletContext.getInitParameter("payMethod").equals("payPal")) {
+					createdPayment = createPayment(course, address, cc, student);
+					if (createdPayment == null) {
+						paymentSuccess = false;
+					}
+					System.out.println("Payment using payPal");
+				}
+				//Successful payment
+				if (paymentSuccess) {
+					Attendance attendance = new Attendance();
+					attendance.setCourse(course);
+					attendance.setStudent(student);
+					attendance.setDate(Date.valueOf(LocalDate.now()));
+					attendanceService.save(attendance);
+					model.addAttribute("course", course);
+					return "paymentSuccess";
+				}
 			} catch (PayPalRESTException e) {
 				System.out.println(e.getMessage());
 			}
-	    } 
+	    }
+	    model.addAttribute("error", "Error encountered, check payment details!");
+    	model.addAttribute("creditCard", cc);
+    	model.addAttribute("course", course);
+    	model.addAttribute("address", address);
+    	model.addAttribute("student", student);
 		//Error return back to payment page
 		return "payment";
 	}
@@ -117,43 +132,46 @@ public class PaymentController implements ServletContextAware {
 		return "paymentSuccess";
 	}
 	
-	public Payment createPayment() {
+	public Payment createPayment(Course course, mum.cs544.domain.Address address, mum.cs544.domain.CreditCard cc, Student student) {
 		// ###Address
 		// Base Address object used as shipping or billing
 		// address in a payment. [Optional]
 		Address billingAddress = new Address();
-		billingAddress.setCity("Johnstown");
-		billingAddress.setCountryCode("US");
-		billingAddress.setLine1("52 N Main ST");
-		billingAddress.setPostalCode("43210");
-		billingAddress.setState("OH");
+		billingAddress.setCity(address.getCity());
+		billingAddress.setCountryCode(address.getCountry());
+		billingAddress.setLine1(address.getStreet());
+		billingAddress.setPostalCode(address.getZipcode());
+		billingAddress.setState(address.getState());
 
 		// ###CreditCard
 		// A resource representing a credit card that can be
 		// used to fund a payment.
 		com.paypal.api.payments.CreditCard creditCard = new com.paypal.api.payments.CreditCard();
 		creditCard.setBillingAddress(billingAddress);
-		creditCard.setCvv2("111");
-		creditCard.setExpireMonth("11");
-		creditCard.setExpireYear("2018");
-		creditCard.setFirstName("Joe");
-		creditCard.setLastName("Shopper");
-		creditCard.setNumber("5500005555555559");
-		creditCard.setType("mastercard");
+		creditCard.setCvv2(cc.getCvv());
+		creditCard.setExpireMonth(cc.getExpireMonth());
+		creditCard.setExpireYear(cc.getExpireYear());
+		String[] name = cc.getNameOnCard().split(" ");
+		creditCard.setFirstName(name[0].trim());
+		creditCard.setLastName(name[1].trim());
+		creditCard.setNumber(cc.getCcNo());
+		creditCard.setType(cc.getType());
 
 		// ###Details
 		// Let's you specify details of a payment amount.
 		AmountDetails details = new AmountDetails();
-		details.setShipping("1");
-		details.setSubtotal("5");
-		details.setTax("1");
+		details.setShipping("0");
+		int price = (int) Math.round(course.getPrice());
+		details.setSubtotal(String.valueOf(price));
+		details.setTax("0");
 
 		// ###Amount
 		// Let's you specify a payment amount.
 		Amount amount = new Amount();
 		amount.setCurrency("USD");
 		// Total must be equal to sum of shipping, tax and subtotal.
-		amount.setTotal("7");
+		System.out.println(String.valueOf(price));
+		amount.setTotal(String.valueOf(price));
 		amount.setDetails(details);
 
 		// ###Transaction
@@ -213,8 +231,8 @@ public class PaymentController implements ServletContextAware {
 			// reused within the expiry window
 			Map<String, String> sdkConfig = new HashMap<String, String>();
 			sdkConfig.put("mode", "sandbox");
-			String accessToken = new OAuthTokenCredential("AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS",
-					"EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL").getAccessToken();
+			String accessToken = new OAuthTokenCredential(this.servletContext.getInitParameter("clientID"),
+					this.servletContext.getInitParameter("clientSecret")).getAccessToken();
 
 			// ### Api Context
 			// Pass in a `ApiContext` object to authenticate

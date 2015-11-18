@@ -33,6 +33,18 @@
   		classpath:mum/cs544/config/security-context.xml
   	</param-value>
   </context-param>
+  <context-param>
+  	<param-name>clientID</param-name>
+  	<param-value>AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>clientSecret</param-name>
+  	<param-value>EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL</param-value>
+  </context-param>
+   <context-param>
+  	<param-name>payMethod</param-name>
+  	<param-value>none</param-value>
+  </context-param>
   <filter>
     <filter-name>springSecurityFilterChain</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
