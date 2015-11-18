@@ -112,6 +112,7 @@ public class PaymentController implements ServletContextAware {
 					attendance.setDate(Date.valueOf(LocalDate.now()));
 					attendanceService.save(attendance);
 					model.addAttribute("course", course);
+					model.addAttribute("createdPayment", createdPayment);
 					return "paymentSuccess";
 				}
 			} catch (PayPalRESTException e) {

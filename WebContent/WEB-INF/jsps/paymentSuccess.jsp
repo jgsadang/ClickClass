@@ -27,6 +27,9 @@
 	<div id="main">
 		<section class="container">
 		<h2>Payment Successful.</h2>
+		<c:if test="${not empty createdPayment}">
+			<h4>Created payment with id = ${createdPayment.id} and status = ${createdPayment.state}</h4>
+		</c:if>
 		<h4>Thank you for subscribing to the course..</h4>
 	    <form method="post" action="${pageContext.request.contextPath}/viewCourse">
    			<input type="hidden" name="id" value="${course.id}"/>
