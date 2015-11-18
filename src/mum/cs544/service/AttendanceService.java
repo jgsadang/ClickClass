@@ -1,6 +1,7 @@
 package mum.cs544.service;
 
 
+import java.util.Date;
 import java.util.List;
 
 import mum.cs544.domain.Attendance;
@@ -16,4 +17,6 @@ public interface AttendanceService {
 	public Attendance getAttendance(Student student, Course course);
 	
 	public List<Attendance> getAll();
+	
+	public List<Attendance> getAttendanceByDate(Date date);
 }
