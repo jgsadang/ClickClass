@@ -64,7 +64,7 @@
 			<c:if test="${Courses != null}">
 				<div class="courseVideos">
 					<c:forEach var="course" items="${Courses}">
-						<h2>${course.title}</h2>
+		
 						<div class="courseSmallBox">
 							<!-- <a href="showCourse?id=${course.id}"> -->
 							<img src="resources/CourseImages/${course.thumburl}" alt="view" />

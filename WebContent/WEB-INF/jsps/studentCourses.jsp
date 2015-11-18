@@ -30,7 +30,6 @@
 	<c:forEach var="at" items="${stCourses}">
 		<c:if test="${at != null}">
 		<div class="courseVideos">
-			<h2>${at.course.title}</h2>
     		<div class="courseSmallBox">
 				<!-- <a href="showCourse?id=${course.id}"> -->
 				<img src="resources/CourseImages/${at.course.thumburl}" alt="view" />
