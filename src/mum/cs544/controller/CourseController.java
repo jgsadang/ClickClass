@@ -75,9 +75,13 @@ public class CourseController implements ServletContextAware {
 				// Creating the directory to store file
 				//String rootPath = System.getProperty("catalina.home");
 				String folder = "CourseImages";
-				if (i==0) {
+				if (file.getOriginalFilename().contains("jpg")) {
+					folder = "CourseImages";
+				}
+				if (file.getOriginalFilename().contains("mp4")) {
 					folder = "CourseVideos";
 				}
+
 				File dir = new File(this.servletContext.getRealPath("/resources") + File.separator + folder);
 				if (!dir.exists())
 					dir.mkdirs();
