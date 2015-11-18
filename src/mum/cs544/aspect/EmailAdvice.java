@@ -43,10 +43,10 @@ public class EmailAdvice {
 	        Integer cid = (Integer)args[1];
 	        
 	        
-	        System.out.println("--------"+cid);
+	       // System.out.println("--------"+cid);
 	        Course course = courseService.getCourse(cid);
 	        
-	        System.out.println("--------"+course.getDescription());
+	        //System.out.println("--------"+course.getDescription());
 	        
 	        Instructor instructor = instructorService.getInstructor(course.getInstructor().getId());
 	        
